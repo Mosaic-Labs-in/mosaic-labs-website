@@ -1,12 +1,20 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import MosaicLogoAssembly from './MosaicLogoAssembly';
 
 export default function SplashScreen({ children }: { children: React.ReactNode }) {
-  const [splashState, setSplashState] = useState<'visible' | 'sliding' | 'hidden'>('visible');
+  // The six-second assembly is the landing moment. Deep links to inner routes
+  // (an inquiry link in an email, say) should open straight onto the content.
+  const isHome = usePathname() === '/';
+  const [splashState, setSplashState] = useState<'visible' | 'sliding' | 'hidden'>(
+    isHome ? 'visible' : 'hidden'
+  );
 
   useEffect(() => {
+    if (!isHome) return;
+
     // The animation takes about 4.8 seconds for all tiles to become fully black
     const slideTimer = setTimeout(() => {
       setSplashState('sliding');
@@ -21,7 +29,7 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
       clearTimeout(slideTimer);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [isHome]);
 
   return (
     <>

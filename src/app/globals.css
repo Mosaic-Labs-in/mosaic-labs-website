@@ -5,6 +5,19 @@
   --foreground: #171717;
 }
 
+/* Mosaic brand palette
+   maroon #4D111C  brand ink, deep bands
+   ink    #272727  body copy
+   amber  #FFB502  every interaction lives here
+   sand   #E5DED2  resting surfaces, tiles
+   white  #FFFFFF  page base                                              */
+@theme {
+  --color-brand-maroon: #4d111c;
+  --color-brand-ink: #272727;
+  --color-brand-amber: #ffb502;
+  --color-brand-sand: #e5ded2;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -44,4 +57,326 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ======================================================================
+   Mosaic UI kit -- shared by the inquiry page here and in website-5.
+   Keep the two copies of this block in sync.
+   ====================================================================== */
+
+@layer components {
+
+/* Eyebrow: solid small caps label led by a static maroon tile */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-brand-ink);
+}
+.eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  background: var(--color-brand-maroon);
+}
+
+/* On the maroon surfaces a maroon tile would disappear, so those flip to
+   solid white text with an amber tile. */
+.eyebrow--invert { color: #fff; }
+.eyebrow--invert::before { background: var(--color-brand-amber); }
+
+@keyframes tile-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.55); }
+}
+
+/* Mosaic field: the tiled backdrop.
+   Two identical tile grids are stacked. The lower one rests in sand; the
+   upper one is amber and is masked to a soft circle that tracks the
+   pointer, so tiles light up as the cursor sweeps across them. */
+.mosaic-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.mosaic-field[data-ready="true"] { opacity: 1; }
+
+/* Tiles only in the outer gutters. The long form section leaves a lot of
+   empty white either side, so the field is masked to the page edges and the
+   middle stays clear behind the content. */
+.mosaic-field--edges {
+  -webkit-mask-image: linear-gradient(
+    to right, #000 0, #000 6%, transparent 20%,
+    transparent 80%, #000 94%, #000 100%
+  );
+  mask-image: linear-gradient(
+    to right, #000 0, #000 6%, transparent 20%,
+    transparent 80%, #000 94%, #000 100%
+  );
+}
+
+.mosaic-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.mosaic-layer--glow {
+  opacity: var(--glow-opacity, 0);
+  transition: opacity 500ms ease;
+  -webkit-mask-image: radial-gradient(
+    circle var(--glow-radius, 190px) at var(--mx, 50%) var(--my, 50%),
+    #000 0%,
+    rgba(0, 0, 0, 0.6) 45%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    circle var(--glow-radius, 190px) at var(--mx, 50%) var(--my, 50%),
+    #000 0%,
+    rgba(0, 0, 0, 0.6) 45%,
+    transparent 72%
+  );
+}
+
+.mosaic-tile {
+  position: absolute;
+  animation: tile-drift var(--tile-duration, 6s) ease-in-out var(--tile-delay, 0s) infinite;
+}
+
+@keyframes tile-drift {
+  0%, 100% { opacity: var(--tile-low, 0.25); }
+  50% { opacity: var(--tile-high, 0.7); }
+}
+
+/* Floating-label fields: sand at rest, white with an amber ring on focus. */
+.mfield { position: relative; display: block; }
+
+.mfield__input {
+  width: 100%;
+  display: block;
+  background: color-mix(in oklab, var(--color-brand-sand) 42%, #fff);
+  border: 1px solid color-mix(in oklab, var(--color-brand-maroon) 14%, transparent);
+  padding: 1.6rem 0.95rem 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-brand-ink);
+  outline: none;
+  border-radius: 0;
+  appearance: none;
+  transition: background-color 240ms ease, border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+.mfield__input:hover:not(:focus) {
+  background: color-mix(in oklab, var(--color-brand-sand) 62%, #fff);
+}
+.mfield__input:focus {
+  background: #fff;
+  border-color: var(--color-brand-maroon);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-amber) 55%, transparent);
+}
+.mfield__input::placeholder { color: transparent; }
+
+.mfield__label {
+  position: absolute;
+  left: 0.95rem;
+  top: 1.1rem;
+  transform-origin: left top;
+  font-size: 0.9375rem;
+  line-height: 1;
+  color: color-mix(in oklab, var(--color-brand-ink) 58%, #fff);
+  pointer-events: none;
+  transition: transform 260ms cubic-bezier(0.19, 1, 0.22, 1), color 200ms ease;
+}
+.mfield__input:focus ~ .mfield__label,
+.mfield__input:not(:placeholder-shown) ~ .mfield__label {
+  transform: translateY(-0.62rem) scale(0.72);
+  color: var(--color-brand-maroon);
+}
+
+.mfield--error .mfield__input {
+  border-color: var(--color-brand-maroon);
+  background: color-mix(in oklab, var(--color-brand-maroon) 7%, #fff);
+}
+
+/* Country code select. Height is matched to .mfield__input so it lines up with
+   the number box beside it, but the text is centred since it carries no
+   floating label of its own.
+   .mfield__input is 1.6 + 0.6 padding + 1.40625 content = 3.60625rem, so
+   (3.60625 - 1.40625) / 2 = 1.1rem of padding either side here. */
+.mfield__code {
+  display: block;
+  background-color: color-mix(in oklab, var(--color-brand-sand) 42%, #fff);
+  border: 1px solid color-mix(in oklab, var(--color-brand-maroon) 14%, transparent);
+  padding: 1.1rem 2.4rem 1.1rem 0.95rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-brand-ink);
+  outline: none;
+  border-radius: 0;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%234d111c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.75 6 6.25 11 1.75'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 11px 8px;
+  transition: background-color 240ms ease, border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+.mfield__code:hover:not(:focus) {
+  background-color: color-mix(in oklab, var(--color-brand-sand) 62%, #fff);
+}
+.mfield__code:focus {
+  background-color: #fff;
+  border-color: var(--color-brand-maroon);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-amber) 55%, transparent);
+}
+
+/* The country code and the number are one field, so they react as one: hover or
+   focus either control and both boxes lift together and the label floats. The
+   amber ring stays on whichever control actually has focus, so the caret is
+   still findable. Declared after the single-control rules so it wins the
+   equal-specificity ties. */
+.mfield__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+/* Side by side only once there is room. Below this the country select and the
+   number would each be too narrow to read inside the form card. */
+@media (min-width: 640px) {
+  .mfield__row { flex-direction: row; }
+}
+.mfield__row:hover:not(:focus-within) .mfield__code,
+.mfield__row:hover:not(:focus-within) .mfield__input {
+  background-color: color-mix(in oklab, var(--color-brand-sand) 62%, #fff);
+}
+.mfield__row:focus-within .mfield__code,
+.mfield__row:focus-within .mfield__input {
+  background-color: #fff;
+  border-color: var(--color-brand-maroon);
+}
+.mfield__row:focus-within .mfield__label {
+  transform: translateY(-0.62rem) scale(0.72);
+  color: var(--color-brand-maroon);
+}
+
+/* Chips: sand pills that snap to amber when picked */
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-brand-ink);
+  background: color-mix(in oklab, var(--color-brand-sand) 55%, #fff);
+  border: 1px solid color-mix(in oklab, var(--color-brand-maroon) 12%, transparent);
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1),
+    background-color 220ms ease, border-color 220ms ease, color 220ms ease,
+    box-shadow 220ms ease;
+}
+.chip:hover {
+  transform: translateY(-2px);
+  background: var(--color-brand-sand);
+  box-shadow: 0 6px 16px -8px color-mix(in oklab, var(--color-brand-maroon) 50%, transparent);
+}
+.chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-amber) 70%, transparent);
+}
+.chip__tile {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  background: color-mix(in oklab, var(--color-brand-maroon) 22%, transparent);
+  transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 220ms ease;
+}
+.chip[aria-pressed="true"] {
+  background: var(--color-brand-amber);
+  border-color: var(--color-brand-maroon);
+  color: var(--color-brand-maroon);
+}
+.chip[aria-pressed="true"] .chip__tile {
+  background: var(--color-brand-maroon);
+  transform: rotate(45deg) scale(1.15);
+}
+
+/* Buttons */
+.btn-wipe {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-brand-maroon);
+  color: #fff;
+  transition: color 300ms ease, transform 260ms cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 260ms ease;
+}
+.btn-wipe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-brand-amber);
+  transform: translateX(-101%);
+  transition: transform 480ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.btn-wipe:hover:not(:disabled) {
+  color: var(--color-brand-maroon);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -16px color-mix(in oklab, var(--color-brand-maroon) 85%, transparent);
+}
+.btn-wipe:hover:not(:disabled)::before { transform: translateX(0); }
+.btn-wipe:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-amber) 80%, transparent);
+}
+.btn-wipe:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Underline that grows from the left */
+.underline-grow {
+  background-image: linear-gradient(var(--color-brand-amber), var(--color-brand-amber));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 340ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.underline-grow:hover,
+.underline-grow:focus-visible { background-size: 100% 2px; }
+
+/* Reveal-on-scroll resting state; GSAP takes it from here */
+.reveal { opacity: 0; transform: translateY(28px); }
+
+/* Success mosaic */
+.pop-tile {
+  opacity: 0;
+  transform: scale(0.3) rotate(-25deg);
+  animation: tile-pop 620ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--pop-delay, 0ms) forwards;
+}
+@keyframes tile-pop {
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Motion opt-out */
+@media (prefers-reduced-motion: reduce) {
+  .mosaic-tile,
+  .pop-tile {
+    animation: none !important;
+  }
+  .pop-tile { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; }
+  .mosaic-layer--glow { display: none; }
+  .btn-wipe::before { transition: none; }
+}
 }
