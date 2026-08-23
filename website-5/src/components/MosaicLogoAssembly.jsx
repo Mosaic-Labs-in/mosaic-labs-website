@@ -1,19 +1,7 @@
-"use client";
-
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-/**
- * MOSAIC logo assembly — locked preset:
- *   assembly: shatter · order: R → L · palette: spectrum · shadow: off · surface: paper
- *
- * Requires: npm i three @types/three
- * Usage: <MosaicLogoAssembly />  (fills its parent; give the parent a size)
- */
-
-type Tile = { name: string; pts: [number, number][]; color: string };
-
-const TILES: Tile[] = [
+const TILES = [
   { name: 'tile-tilt',    pts: [[291,319.5],[332.3,140],[335,140],[510,188.3],[510,190.2],[461.5,369],[459.1,369],[291,322.3]], color: '#4D111C' },
   { name: 'tile-top-mid', pts: [[518,377.6],[529.2,217],[766,217],[756.9,421],[755.1,421],[518,381.9]], color: '#FFB502' },
   { name: 'tile-top-rt',  pts: [[782,417.4],[791.1,217],[1012,217],[1012,424],[782,424]], color: '#272727' },
@@ -25,12 +13,11 @@ const TILES: Tile[] = [
   { name: 'tile-bot-rt',  pts: [[775,686],[1012,686],[1012,891],[1011,892],[794,892],[792.8,891.4],[774.1,686.9]], color: '#272727' }
 ];
 
-const CX = 611.5, CY = 518.5, S = 300;      // logo pixel space -> world units
+const CX = 611.5, CY = 518.5, S = 300;
 const START_DELAY = 0.25;
-const INK = new THREE.Color('#272727'); // tiles resolve to the logo's black
+const INK = new THREE.Color('#272727');
 const INK_HOLD = 0.65, INK_DUR = 1.6;
 
-// shatter
 const M = {
   dur: 1.25,
   stagger: 0.105,
@@ -40,7 +27,7 @@ const M = {
   spinY: 0.85,
   spinX: -0.42,
   dolly: 2.6,
-  start: (cx: number, cy: number, r: () => number) => {
+  start: (cx, cy, r) => {
     const d = new THREE.Vector3(cx, cy, 0.4).normalize();
     const s = 5.5 + r() * 5.5;
     return new THREE.Vector3(
@@ -51,25 +38,11 @@ const M = {
   }
 };
 
-// paper
 const SURFACE = { roughness: 0.78, metalness: 0.0, env: 0.45 };
 
-type Piece = {
-  mesh: THREE.Mesh<THREE.ExtrudeGeometry, THREE.MeshStandardMaterial>;
-  base: THREE.Color;
-  target: THREE.Vector3;
-  start: THREE.Vector3;
-  startQ: THREE.Quaternion;
-  endQ: THREE.Quaternion;
-  delay: number;
-};
+const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
-const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-const easeBack = (t: number) => {
-  const c = M.back;
-  return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2);
-};
-const smootherstep = (t: number) => t * t * t * (t * (t * 6 - 15) + 10);
+const smootherstep = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 const seeded = () => {
   let s = 20260822;
   return () => (s = (s * 16807) % 2147483647) / 2147483647;
@@ -78,13 +51,10 @@ const seeded = () => {
 export default function MosaicLogoAssembly({
   className,
   showWordmark = true
-}: {
-  className?: string;
-  showWordmark?: boolean;
 }) {
-  const hostRef = useRef<HTMLDivElement>(null);
-  const wordRef = useRef<HTMLDivElement>(null);
-  const restartRef = useRef<() => void>(() => {});
+  const hostRef = useRef(null);
+  const wordRef = useRef(null);
+  const restartRef = useRef(() => {});
 
   useEffect(() => {
     const host = hostRef.current;
@@ -101,12 +71,11 @@ export default function MosaicLogoAssembly({
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     host.appendChild(renderer.domElement);
 
-    // soft studio environment (no shadows in this preset)
     const envTexture = () => {
       const c = document.createElement('canvas');
       c.width = 64;
       c.height = 32;
-      const g = c.getContext('2d')!;
+      const g = c.getContext('2d');
       const grad = g.createLinearGradient(0, 0, 0, 32);
       grad.addColorStop(0, '#ffffff');
       grad.addColorStop(0.5, '#dcdad5');
@@ -139,9 +108,9 @@ export default function MosaicLogoAssembly({
     logo.name = 'mosaic-logo';
     scene.add(logo);
 
-    const pieces: Piece[] = [];
+    const pieces = [];
     for (const t of TILES) {
-      const world = t.pts.map(([x, y]) => [(x - CX) / S, -(y - CY) / S] as [number, number]);
+      const world = t.pts.map(([x, y]) => [(x - CX) / S, -(y - CY) / S]);
       const cx = world.reduce((a, p) => a + p[0], 0) / world.length;
       const cy = world.reduce((a, p) => a + p[1], 0) / world.length;
 
@@ -183,7 +152,6 @@ export default function MosaicLogoAssembly({
       });
     }
 
-    // R → L, column by column
     let total = 0;
     const buildMotion = () => {
       const r = seeded();
@@ -198,7 +166,7 @@ export default function MosaicLogoAssembly({
         );
         p.delay = START_DELAY + r() * 0.06;
       }
-      const col = (p: Piece) => Math.round(p.target.x * 1.6);
+      const col = (p) => Math.round(p.target.x * 1.6);
       pieces
         .slice()
         .sort((a, b) => col(b) - col(a) || b.target.y - a.target.y)
@@ -219,7 +187,7 @@ export default function MosaicLogoAssembly({
 
     const tmpQ = new THREE.Quaternion();
     let raf = 0;
-    const frame = (now: number) => {
+    const frame = (now) => {
       const time = (now - t0) / 1000;
       const inkT = smootherstep(
         THREE.MathUtils.clamp((time - total - INK_HOLD) / INK_DUR, 0, 1)

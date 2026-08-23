@@ -1,11 +1,10 @@
-"use client";
-
-import Navbar from "@/components/Navbar";
 import { useEffect, useRef } from "react";
+import Navbar from "./components/Navbar";
+import SplashScreen from "./components/SplashScreen";
 import gsap from "gsap";
 
-export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
+function App() {
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -27,7 +26,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col min-h-screen bg-[#f9f8f6] font-sans relative overflow-x-hidden">
+    <SplashScreen>
+      <div ref={containerRef} className="flex flex-col min-h-screen bg-[#f9f8f6] font-sans relative overflow-x-hidden">
       <Navbar />
       
       {/* Absolute Logo (Scrolls with page) */}
@@ -67,8 +67,11 @@ export default function Home() {
         </div>
       </main>
       
-      {/* Spacer for scroll testing */}
-      <div className="h-[1000px] w-full"></div>
-    </div>
+        {/* Spacer for scroll testing */}
+        <div className="h-[1000px] w-full"></div>
+      </div>
+    </SplashScreen>
   );
 }
+
+export default App;

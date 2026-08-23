@@ -1,10 +1,8 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MosaicLogoAssembly from './MosaicLogoAssembly';
 
-export default function SplashScreen({ children }: { children: React.ReactNode }) {
-  const [splashState, setSplashState] = useState<'visible' | 'sliding' | 'hidden'>('visible');
+export default function SplashScreen({ children }) {
+  const [splashState, setSplashState] = useState('visible');
 
   useEffect(() => {
     // The animation takes about 4.8 seconds for all tiles to become fully black
