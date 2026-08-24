@@ -379,4 +379,142 @@ body {
   .mosaic-layer--glow { display: none; }
   .btn-wipe::before { transition: none; }
 }
+
+/* Hide splash screen completely on SSR/load if already played */
+html.splash-played .splash-screen-container {
+  display: none !important;
+}
+
+/* ============================================================
+   Service Cards — interactive butter-yellow ink hover
+   ============================================================ */
+.services-grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.service-card {
+  position: relative;
+  display: flex;
+  min-height: clamp(18rem, 46dvh, 28rem);
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transition: border-color 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.service-card.is-hovered {
+  border-color: #ffe08a;
+}
+
+/* Butter-yellow circle that grows from the cursor */
+.service-card__ink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 50%;
+  background: #ffe08a;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.service-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.service-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-card__index {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+}
+
+.service-card__chip {
+  display: inline-flex;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: auto;
+}
+
+.service-card__name {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.service-card__tagline {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(0.6875rem, 0.9vw, 0.8125rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card__desc {
+  max-width: 34rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.55;
+}
+
+/* Text eases to burgundy as the yellow fill spreads */
+.service-card__index,
+.service-card__chip,
+.service-card__name,
+.service-card__tagline,
+.service-card__desc {
+  transition:
+    color 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.service-card.is-hovered .service-card__index,
+.service-card.is-hovered .service-card__chip,
+.service-card.is-hovered .service-card__name,
+.service-card.is-hovered .service-card__tagline,
+.service-card.is-hovered .service-card__desc {
+  color: var(--color-brand-maroon);
+}
+
+.service-card.is-hovered .service-card__chip {
+  border-color: color-mix(in oklab, var(--color-brand-maroon) 45%, transparent);
+}
+
 }

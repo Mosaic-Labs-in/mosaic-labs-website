@@ -13,7 +13,16 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
   );
 
   useEffect(() => {
-    if (!isHome) return;
+    // If it's skipped via reload or a previous SPA navigation, hide it.
+    if (document.documentElement.classList.contains('splash-played')) {
+      setSplashState('hidden');
+      return;
+    }
+
+    if (!isHome) {
+      document.documentElement.classList.add('splash-played');
+      return;
+    }
 
     // The animation takes about 4.8 seconds for all tiles to become fully black
     const slideTimer = setTimeout(() => {
@@ -23,6 +32,7 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
     // After the 1-second slide transition, unmount the splash screen
     const hideTimer = setTimeout(() => {
       setSplashState('hidden');
+      document.documentElement.classList.add('splash-played');
     }, 6000);
 
     return () => {
@@ -35,7 +45,7 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
     <>
       {splashState !== 'hidden' && (
         <div 
-          className={`fixed inset-0 w-screen h-screen z-[100] bg-[#e9e7e2] transition-transform duration-1000 ease-in-out ${
+          className={`splash-screen-container fixed inset-0 w-screen h-screen z-[100] bg-[#e9e7e2] transition-transform duration-1000 ease-in-out ${
             splashState === 'sliding' ? '-translate-y-full' : 'translate-y-0'
           }`}
         >
