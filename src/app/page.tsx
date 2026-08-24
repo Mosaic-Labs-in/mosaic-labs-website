@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import { SiteFooter } from "@/components/SiteFooter";
 import ServiceCards from "@/components/ServiceCards";
+import { DataMorph } from "@/components/DataMorph";
 import { MosaicField } from "@/components/MosaicField";
 import { SplitHeading } from "@/components/SplitHeading";
 import { Magnetic } from "@/components/Magnetic";
@@ -66,6 +67,7 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="flex flex-col min-h-screen bg-[#f9f8f6] font-sans relative overflow-x-hidden">
+      <DataMorph />
       <Navbar />
       
       {/* Absolute Logo (Scrolls with page) */}
@@ -74,7 +76,7 @@ export default function Home() {
       </div>
       
       {/* Main Content Area */}
-      <main className="relative isolate flex flex-col flex-1 w-full min-h-dvh px-6 md:px-10 lg:px-12 pt-24 lg:flex-row items-center overflow-hidden">
+      <main id="morph-start" className="relative flex flex-col flex-1 w-full min-h-dvh px-6 md:px-10 lg:px-12 pt-24 lg:flex-row items-center overflow-hidden">
         <MosaicField size={92} low={0.09} high={0.26} radius={230} />
         <div
           aria-hidden="true"
@@ -82,7 +84,7 @@ export default function Home() {
         />
 
         {/* Left Column: Text */}
-        <div className="relative flex-1 flex flex-col items-start text-left max-w-[650px]">
+        <div className="relative z-20 flex-1 flex flex-col items-start text-left max-w-[650px]">
           {/* Headline — words rise out of their line boxes once the splash clears */}
           <SplitHeading
             as="h1"
@@ -130,9 +132,10 @@ export default function Home() {
       {/* Section 02 — What We Do */}
       <section
         id="what-we-do"
+        data-morph-dark
         className="px-6 md:px-10 lg:px-12 py-24 bg-brand-maroon w-full min-h-dvh flex items-center scroll-mt-24"
       >
-        <div className="max-w-[1280px] mx-auto w-full">
+        <div className="relative z-20 max-w-[1280px] mx-auto w-full">
           <div className="mb-12 gsap-reveal opacity-0">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.05]">
               Two ways we put<br />data to work.
@@ -147,8 +150,11 @@ export default function Home() {
       </section>
 
       {/* Section 04 — Why Mosaic? */}
-      <section className="px-6 md:px-10 lg:px-12 py-32 bg-[#f9f8f6] w-full min-h-dvh flex items-center">
-        <div className="max-w-[1280px] mx-auto w-full">
+      <section
+        id="morph-end"
+        className="px-6 md:px-10 lg:px-12 py-32 bg-[#f9f8f6] w-full min-h-dvh flex items-center"
+      >
+        <div className="relative z-20 max-w-[1280px] mx-auto w-full">
           <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-maroon mb-16 gsap-reveal opacity-0 flex items-center gap-3">
             <span className="w-2 h-2 bg-brand-amber inline-block"></span>
             Why Mosaic?

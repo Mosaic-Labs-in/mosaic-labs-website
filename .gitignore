@@ -42,3 +42,11 @@ next-env.d.ts
 
 # keep the env template committed even though .env* is ignored
 !.env.example
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
