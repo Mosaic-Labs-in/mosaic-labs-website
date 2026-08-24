@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 
 type ServiceItem = {
@@ -8,6 +9,7 @@ type ServiceItem = {
   category: string;
   description: string;
   chip: string;
+  href: "/data-operations" | "/market-intelligence";
 };
 
 const SERVICES: ServiceItem[] = [
@@ -17,6 +19,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "We collect, clean, deduplicate, annotate and structure real-world unstructured data — images, video, audio, text and documents — into high-quality, model-ready datasets built for your exact use case.",
     chip: "Build",
+    href: "/data-operations",
   },
   {
     name: "Market Intelligence",
@@ -24,6 +27,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "We turn your data — or the market's — into strategic insight: customer behaviour, pricing, competition and growth opportunities, shaped around the decision you actually need to make.",
     chip: "Decide",
+    href: "/market-intelligence",
   },
 ];
 
@@ -44,7 +48,7 @@ function ServiceCard({
   service: ServiceItem;
   index: number;
 }) {
-  const cardRef = useRef<HTMLElement | null>(null);
+  const cardRef = useRef<HTMLAnchorElement | null>(null);
   const inkRef = useRef<HTMLSpanElement | null>(null);
   const tween = useRef<gsap.core.Tween | null>(null);
 
@@ -82,7 +86,8 @@ function ServiceCard({
   };
 
   return (
-    <article
+    <Link
+      href={service.href}
       className="service-card gsap-reveal opacity-0"
       ref={cardRef}
       onPointerEnter={(e) => spread(e, true)}
@@ -102,8 +107,9 @@ function ServiceCard({
           <h3 className="service-card__name">{service.name}</h3>
           <p className="service-card__tagline">{service.category}</p>
           <p className="service-card__desc">{service.description}</p>
+          <span className="service-card__go">Explore {service.name} &rarr;</span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

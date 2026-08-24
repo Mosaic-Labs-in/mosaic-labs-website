@@ -3,8 +3,8 @@ import { EMAIL, PHONES, telHref } from "@/lib/inquiry";
 
 const NAV = [
   { label: "Overview", href: "/" as const },
-  { label: "Data Operations", href: "/" as const },
-  { label: "Market Intelligence", href: "/" as const },
+  { label: "Data Operations", href: "/data-operations" as const },
+  { label: "Market Intelligence", href: "/market-intelligence" as const },
   { label: "Inquiry", href: "/inquiry" as const },
 ];
 

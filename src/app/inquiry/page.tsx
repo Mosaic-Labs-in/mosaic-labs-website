@@ -79,7 +79,10 @@ export default function InquiryPage() {
 
             {/* Signal band */}
             <Reveal
-              className="mt-14 grid gap-px overflow-hidden border border-brand-maroon/12 bg-brand-maroon/12 sm:grid-cols-3 md:mt-20"
+              // White ground with divider rules rather than a tinted container
+              // behind gap-px: the cells fade in, and a tinted container shows
+              // through as a bare slab until they land.
+              className="mt-14 grid divide-y divide-brand-maroon/12 overflow-hidden border border-brand-maroon/12 bg-white sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:mt-20"
               stagger={0.12}
             >
               {SIGNALS.map((signal) => (

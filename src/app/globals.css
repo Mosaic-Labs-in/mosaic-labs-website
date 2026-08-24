@@ -517,4 +517,229 @@ html.splash-played .splash-screen-container {
   border-color: color-mix(in oklab, var(--color-brand-maroon) 45%, transparent);
 }
 
+.service-card__go {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.service-card.is-hovered .service-card__go {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--color-brand-maroon);
+}
+
+
+
+/* ============================================================
+   Split headings — words rise out of a clipped line box
+   ============================================================ */
+.split-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.split-word {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform;
+}
+
+/* ============================================================
+   Pipeline flow — stages joined by connectors that draw in
+   ============================================================ */
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flow__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.flow__step {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+  background: none;
+  border: 0;
+  cursor: default;
+  text-align: left;
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.flow__index {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  transition: color 320ms ease;
+}
+.flow__label {
+  font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  transition: color 320ms ease;
+}
+
+/* the connector */
+.flow__line {
+  display: block;
+  overflow: hidden;
+  margin-left: 0.3rem;
+}
+.flow__line i {
+  display: block;
+  width: 1px;
+  height: 1.6rem;
+  transform-origin: top center;
+}
+
+/* Hovering one stage dims the others so a six-step run stays readable */
+.flow.is-focused .flow__step { opacity: 0.4; }
+.flow.is-focused .flow__step.is-active {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* dark ground (maroon / ink sections) */
+.flow--dark .flow__index { color: rgba(255, 255, 255, 0.4); }
+.flow--dark .flow__label { color: var(--color-brand-amber); }
+.flow--dark .flow__line i { background: rgba(255, 255, 255, 0.25); }
+.flow--dark .flow__step.is-active .flow__index { color: var(--color-brand-amber); }
+.flow--dark .flow__step.is-active .flow__label { color: #fff; }
+
+/* pale ground */
+.flow--light .flow__index { color: color-mix(in oklab, var(--color-brand-ink) 45%, #fff); }
+.flow--light .flow__label { color: var(--color-brand-maroon); }
+.flow--light .flow__line i { background: color-mix(in oklab, var(--color-brand-maroon) 25%, transparent); }
+.flow--light .flow__step.is-active .flow__index { color: var(--color-brand-maroon); }
+.flow--light .flow__step.is-active .flow__label { color: var(--color-brand-maroon); }
+.flow--light .flow__step.is-active .flow__index::after { background: var(--color-brand-amber); }
+
+/* Horizontal once there is room for it */
+@media (min-width: 64rem) {
+  .flow {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+  }
+  .flow__item {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
+  .flow__line {
+    margin: 0 1rem;
+  }
+  .flow__line i {
+    width: 2.5rem;
+    height: 1px;
+    transform-origin: left center;
+  }
+  .flow.is-focused .flow__step.is-active {
+    transform: translateY(-3px);
+  }
+}
+
+/* ============================================================
+   Capability cards — the ink hover, on a pale ground
+   ============================================================ */
+.cap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border: 1px solid color-mix(in oklab, var(--color-brand-maroon) 14%, transparent);
+  background: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cap.is-hovered { border-color: var(--color-brand-maroon); }
+
+.cap__ink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 50%;
+  background: var(--color-brand-amber);
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cap__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+}
+.cap__index {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: color-mix(in oklab, var(--color-brand-ink) 45%, #fff);
+}
+.cap__name {
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-maroon);
+}
+.cap__desc {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-brand-ink) 72%, #fff);
+}
+.cap__go {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-maroon);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 360ms ease, transform 360ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.cap.is-hovered .cap__go { opacity: 1; transform: translateY(0); }
+
+.cap__index,
+.cap__name,
+.cap__desc {
+  transition: color 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cap.is-hovered .cap__index,
+.cap.is-hovered .cap__desc { color: color-mix(in oklab, var(--color-brand-maroon) 80%, transparent); }
+.cap.is-hovered .cap__name { color: var(--color-brand-maroon); }
+
+@media (prefers-reduced-motion: reduce) {
+  .split-word { transform: none !important; opacity: 1 !important; }
+  .cap__ink { display: none; }
+}
+
 }
