@@ -48,7 +48,7 @@ export function ServicePageBody({ page }: { page: ServicePage }) {
               as="h1"
               immediate
               delay={0.15}
-              className="mt-6 max-w-4xl text-[clamp(2rem,7.5vw,4.5rem)] font-black leading-[1] tracking-[-0.02em] text-brand-maroon"
+              className="mt-6 max-w-4xl text-[clamp(2rem,7.5vw,4.5rem)] font-black leading-[1.10] tracking-[0.04em] text-brand-maroon font-molgan"
             />
 
             <Reveal delay={0.3}>
@@ -114,7 +114,7 @@ export function ServicePageBody({ page }: { page: ServicePage }) {
 
             <SplitHeading
               text={"Every project moves\nthrough the same gates."}
-              className="mt-6 max-w-3xl text-[clamp(1.75rem,4.5vw,3rem)] font-bold leading-[1.05] tracking-tight text-white"
+              className="mt-6 max-w-3xl text-[clamp(1.75rem,4.5vw,3rem)] font-bold leading-[1.22] tracking-[0.04em] text-white font-molgan"
             />
 
             <div className="mt-14">
@@ -139,7 +139,7 @@ export function ServicePageBody({ page }: { page: ServicePage }) {
 
             <SplitHeading
               text={"Pick the one that\nsounds like your problem."}
-              className="mt-6 mb-14 max-w-3xl text-[clamp(1.75rem,4.5vw,3rem)] font-bold leading-[1.05] tracking-tight text-brand-maroon"
+              className="mt-6 mb-14 max-w-3xl text-[clamp(1.75rem,4.5vw,3rem)] font-bold leading-[1.22] tracking-[0.04em] text-brand-maroon font-molgan"
             />
 
             <CapabilityCards items={page.capabilities} />
@@ -191,7 +191,7 @@ export function ServicePageBody({ page }: { page: ServicePage }) {
           <div className="relative max-w-[1280px] mx-auto w-full">
             <SplitHeading
               text={page.closing.headline}
-              className="max-w-3xl text-[clamp(2rem,6vw,4rem)] font-black leading-[1] tracking-[-0.02em] text-white"
+              className="max-w-3xl text-[clamp(2rem,6vw,4rem)] font-black leading-[1.2] tracking-[0.04em] text-white font-molgan"
             />
 
             <Reveal delay={0.2}>

@@ -23,6 +23,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-molgan: var(--font-molgan);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,6 +37,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-molgan {
+  font-family: var(--font-molgan), serif;
+  letter-spacing: 0.04em;
 }
 
 /* Custom Animations */
@@ -545,7 +551,8 @@ html.splash-played .splash-screen-container {
 .split-line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.05em;
+  margin-bottom: 3px;
 }
 .split-word {
   display: inline-block;
@@ -742,4 +749,65 @@ html.splash-played .splash-screen-container {
   .cap__ink { display: none; }
 }
 
+}
+
+/* ── Lenis ───────────────────────────────────────────────────────────────
+   Native smooth scrolling has to be off or it fights Lenis' own easing. */
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Route shutter ───────────────────────────────────────────────────────
+   Deliberately unlayered: these sit above every utility and must not be
+   beaten by one. Columns sweep up to cover, then keep going to uncover. */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  visibility: hidden;
+  pointer-events: none;
+}
+.page-curtain.is-active {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.page-curtain__cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.page-curtain__col {
+  position: relative;
+  flex: 1 1 0;
+  /* A hair of overlap kills the sub-pixel seams between panels mid-sweep. */
+  margin-right: -1px;
+  background: var(--color-brand-maroon);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  will-change: transform;
+}
+.page-curtain__col::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: var(--color-brand-amber);
+}
+
+.page-curtain__mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  filter: brightness(0) invert(1);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-curtain { display: none; }
 }

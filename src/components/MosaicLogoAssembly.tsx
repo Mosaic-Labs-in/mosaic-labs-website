@@ -296,10 +296,10 @@ export default function MosaicLogoAssembly({
             right: 0,
             bottom: '7%',
             textAlign: 'center',
-            fontFamily: 'Helvetica, "Helvetica Neue", Arial, sans-serif',
-            fontSize: 'clamp(22px, 4.4vw, 62px)',
-            letterSpacing: '0.42em',
-            textIndent: '0.42em',
+            fontFamily: 'var(--font-molgan), Helvetica, "Helvetica Neue", Arial, sans-serif',
+            fontSize: 'clamp(24px, 4.8vw, 68px)',
+            letterSpacing: '0.32em',
+            textIndent: '0.32em',
             color: '#272727',
             fontWeight: 400,
             opacity: 0,
@@ -309,7 +309,7 @@ export default function MosaicLogoAssembly({
           }}
         >
           MOSAIC LABS
-          <style>{`div[style*="0.42em"].is-on, .is-on { opacity: 1 !important; }`}</style>
+          <style>{`div[style*="0.32em"].is-on, .is-on { opacity: 1 !important; }`}</style>
         </div>
       )}
 

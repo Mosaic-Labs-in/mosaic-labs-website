@@ -64,7 +64,7 @@ export default function InquiryPage() {
 
           <div className="relative mx-auto w-full max-w-[1280px] px-5 pb-16 pt-28 sm:px-6 sm:pt-32 md:px-10 md:pb-24 md:pt-44 lg:pt-48">
             <Reveal>
-              <h1 className="max-w-4xl text-[clamp(2rem,8.5vw,5rem)] font-black leading-[0.98] tracking-[-0.02em] text-brand-maroon">
+              <h1 className="max-w-4xl text-[clamp(2rem,8.5vw,5rem)] font-black leading-[1.10] tracking-[0.04em] text-brand-maroon font-molgan">
                 Bring us the data
                 <br className="hidden sm:block" />{" "}
                 that won&apos;t behave.

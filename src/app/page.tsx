@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar";
 import { SiteFooter } from "@/components/SiteFooter";
 import ServiceCards from "@/components/ServiceCards";
-import { DataMorph } from "@/components/DataMorph";
 import { MosaicField } from "@/components/MosaicField";
 import { SplitHeading } from "@/components/SplitHeading";
 import { Magnetic } from "@/components/Magnetic";
@@ -67,7 +66,6 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="flex flex-col min-h-screen bg-[#f9f8f6] font-sans relative overflow-x-hidden">
-      <DataMorph />
       <Navbar />
       
       {/* Absolute Logo (Scrolls with page) */}
@@ -76,7 +74,7 @@ export default function Home() {
       </div>
       
       {/* Main Content Area */}
-      <main id="morph-start" className="relative flex flex-col flex-1 w-full min-h-dvh px-6 md:px-10 lg:px-12 pt-24 lg:flex-row items-center overflow-hidden">
+      <main className="relative flex flex-col flex-1 w-full min-h-dvh px-6 md:px-10 lg:px-12 pt-24 lg:flex-row items-center overflow-hidden">
         <MosaicField size={92} low={0.09} high={0.26} radius={230} />
         <div
           aria-hidden="true"
@@ -91,7 +89,7 @@ export default function Home() {
             immediate
             waitForSplash
             text={"Raw reality in.\nDecision-grade\ndata out."}
-            className="text-[clamp(2.5rem,9vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-[#361117] mb-8 font-sans"
+            className="text-[clamp(2.5rem,9vw,4.5rem)] font-bold leading-[1.10] tracking-[0.04em] text-[#361117] mb-8 font-molgan"
           />
 
           {/* Paragraph */}
@@ -132,12 +130,11 @@ export default function Home() {
       {/* Section 02 — What We Do */}
       <section
         id="what-we-do"
-        data-morph-dark
         className="px-6 md:px-10 lg:px-12 py-24 bg-brand-maroon w-full min-h-dvh flex items-center scroll-mt-24"
       >
         <div className="relative z-20 max-w-[1280px] mx-auto w-full">
           <div className="mb-12 gsap-reveal opacity-0">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.05]">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-[0.04em] leading-[1.25] font-molgan">
               Two ways we put<br />data to work.
             </h2>
             <p className="mt-5 text-white/60 text-base md:text-lg max-w-xl leading-relaxed">
@@ -151,7 +148,6 @@ export default function Home() {
 
       {/* Section 04 — Why Mosaic? */}
       <section
-        id="morph-end"
         className="px-6 md:px-10 lg:px-12 py-32 bg-[#f9f8f6] w-full min-h-dvh flex items-center"
       >
         <div className="relative z-20 max-w-[1280px] mx-auto w-full">
