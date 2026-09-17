@@ -1,0 +1,103 @@
+:root {
+  --burgundy: #4d111c;
+  --burgundy-lit: #5e1622;
+  --ink: #272727;
+  --ink-strong: #111;
+  --yellow: #ffb502;
+  --beige: #e5ded2;
+
+  --near-black: #0e0e0e;
+  --curtain: #0a0a0a;
+
+  --rule: #efeae1;
+  --rule-strong: #dcd5c9;
+  --tile-gap: #f2ede4;
+  --dot: #e4dccd;
+
+  --muted: #9b9389;
+  --body: #6d675f;
+  --body-strong: #55504a;
+  --struck: #a8a096;
+
+  --tint-warm: #faf7f1;
+  --tint-card: #fdfbf7;
+  --tile-lit: #fff6e0;
+
+  --gutter: clamp(18px, 5vw, 64px);
+  --section-y: clamp(60px, 13vh, 150px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-jost), "Century Gothic", "Avenir Next", Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--yellow);
+}
+
+canvas {
+  display: block;
+}
+
+button {
+  font: inherit;
+}
+
+@keyframes ml-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ml-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal].ml-revealed {
+  animation: ml-fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.05ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

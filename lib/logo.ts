@@ -1,0 +1,30 @@
+/** Mosaic Labs mark: nine tiles, authored against this viewBox. */
+export const LOGO_VIEWBOX = "211 140 801 757";
+export const LOGO_W = 801;
+export const LOGO_H = 757;
+
+export const PATHS = [
+  "M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z",
+  "M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z",
+  "M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z",
+  "M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z",
+  "M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z",
+  "M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z",
+  "M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z",
+  "M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z",
+  "M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z",
+];
+
+/** The nine tiles dealt into the four draggable pieces. */
+export const GROUPS = [
+  [7, 4],
+  [3, 1],
+  [0, 6],
+  [8, 5, 2],
+];
+
+/** Value-only variation — the pieces differ in shade, never in hue. */
+export const BASE_FILL = ["#2A2A2A", "#343434", "#2F2F2F", "#3A3A3A"];
+
+/** Resting tilt of each scattered piece, in degrees. */
+export const ROT = [-9, 7, 10, -6];
