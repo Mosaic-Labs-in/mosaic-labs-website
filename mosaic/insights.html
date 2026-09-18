@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights — Mosaic Labs Research Journal</title>
+  <meta name="description" content="Technical publications, systems theory, and research papers on physical data infrastructure and precision synchronization.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='211 140 801 757'><path fill='%23141415' d='M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z'/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Shared Continuous Visual Spine -->
+  <canvas id="mosaicSpine" aria-hidden="true"></canvas>
+  <div class="arch-grid-lines" aria-hidden="true">
+    <div class="arch-grid-line-left"></div>
+    <div></div>
+    <div class="arch-grid-line-right"></div>
+  </div>
+
+  <!-- Persistent Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html#hero" class="brand-link" aria-label="Mosaic Labs Home">
+        <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+          <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+          <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+          <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+          <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+          <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+          <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+          <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+          <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+          <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+        </svg>
+        <span>MOSAIC LABS</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html#data-river" class="nav-item-link">Data Layer</a></li>
+          <li><a href="what-we-do.html" class="nav-item-link">What We Do</a></li>
+          <li><a href="solutions.html" class="nav-item-link">Solutions</a></li>
+          <li><a href="about.html" class="nav-item-link">About</a></li>
+          <li><a href="insights.html" class="nav-item-link active">Insights</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <button class="cta-pill cta-pill-solid" data-open-consultation>
+          Work With Us <span class="arrow-icon">→</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="appContainer">
+    <!-- Insights Hero -->
+    <section class="section hero-section" style="min-height: 52vh; justify-content: center; padding-top: 140px;">
+      <div class="container">
+        <div class="section-eyebrow" data-reveal>Research & Publications</div>
+        <h1 class="section-title" style="font-size: clamp(36px, 5.5vw, 68px);" data-reveal>
+          The Mosaic Journal.
+        </h1>
+        <p class="section-subtitle" data-reveal>
+          Theoretical investigations, mathematical formalisms, and hardware architectures for physical sensor synchronization.
+        </p>
+      </div>
+    </section>
+
+    <!-- Research List -->
+    <section class="section">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div class="insights-journal-list">
+          <!-- Article 01 -->
+          <a href="#" class="journal-entry" data-reveal>
+            <span class="journal-date">2026.08.14</span>
+            <div>
+              <h2 class="journal-title">Sub-Millisecond PTP Synchronization in Dynamic Multi-Sensor Fleets</h2>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                Examining clock skew propagation across heterogeneous CAN-FD, automotive Ethernet, and GMSL2 bus lines under extreme thermal and mechanical vibration.
+              </p>
+            </div>
+            <span class="journal-category">ARCHITECTURE</span>
+            <span class="journal-arrow">→</span>
+          </a>
+
+          <!-- Article 02 -->
+          <a href="#" class="journal-entry" data-reveal>
+            <span class="journal-date">2026.06.28</span>
+            <div>
+              <h2 class="journal-title">Resolving 41 Asynchronous Feeds into a Deterministic Ground Truth</h2>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                A mathematical framework for continuous Kalman-Bucy multi-sensor temporal reconciliation without introducing buffer bloat or latency penalties.
+              </p>
+            </div>
+            <span class="journal-category">CALIBRATION</span>
+            <span class="journal-arrow">→</span>
+          </a>
+
+          <!-- Article 03 -->
+          <a href="#" class="journal-entry" data-reveal>
+            <span class="journal-date">2026.04.10</span>
+            <div>
+              <h2 class="journal-title">Why Edge Preprocessing is the Prerequisite for Autonomous Intelligence</h2>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                Why streaming raw sensor feeds directly to cloud GPU clusters introduces catastrophic failure modes, and how deterministic edge gating restores safety margins.
+              </p>
+            </div>
+            <span class="journal-category">FOUNDATIONS</span>
+            <span class="journal-arrow">→</span>
+          </a>
+
+          <!-- Article 04 -->
+          <a href="#" class="journal-entry" data-reveal>
+            <span class="journal-date">2026.02.19</span>
+            <div>
+              <h2 class="journal-title">Zero-Loss Compression of LiDAR Point Clouds on Embedded ARM Architectures</h2>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                Achieving 14.8x real-time spatial voxel compression on edge compute boards without loss of geometric surface fidelity or reflection intensity.
+              </p>
+            </div>
+            <span class="journal-category">COMPUTATION</span>
+            <span class="journal-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Banner -->
+    <section class="section" style="border-bottom: none;">
+      <div class="container">
+        <div class="work-banner" data-reveal>
+          <div class="work-banner-inner">
+            <div class="section-eyebrow" style="color: var(--accent-amber);">Research Access</div>
+            <h2 class="work-banner-title">Access our technical preprints.</h2>
+            <p class="work-banner-desc">
+              Get access to our technical specifications, mathematical whitepapers, and hardware reference designs.
+            </p>
+            <button class="cta-pill cta-pill-solid" data-open-consultation>
+              Request Research Access <span class="arrow-icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Consultation Modal Drawer -->
+  <div class="modal-overlay" id="consultationModal">
+    <div class="modal-drawer">
+      <div>
+        <button class="modal-close-btn" id="closeModalBtn"><span>ESC</span> [✕]</button>
+        <div class="section-eyebrow">Research & Deployment Inquiry</div>
+        <h3 class="modal-title">Request Technical Blueprint</h3>
+        <p class="modal-desc">Tell us about your research or sensor deployment needs.</p>
+        <form class="modal-form" id="consultationForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Dr. Alexis Vance" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <input type="email" class="form-input" placeholder="alexis@autonomous.io" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Domain Focus</label>
+            <select class="form-select">
+              <option>Energy & Mobility</option>
+              <option>Smart Infrastructure</option>
+              <option>Autonomous Robotics / Fleets</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">System Bottleneck / Feeds</label>
+            <textarea class="form-textarea" rows="3" placeholder="Briefly describe your hardware modalities, clock drift, or research interest..."></textarea>
+          </div>
+          <button type="submit" class="cta-pill cta-pill-solid" style="width: 100%; justify-content: center; margin-top: 8px;">
+            Submit Architecture Request →
+          </button>
+        </form>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted); margin-top: 32px;">
+        SECURE ENTERPRISE INGESTION // MOSAIC LABS INC.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="index.html#hero" class="brand-link">
+            <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+              <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+              <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+              <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+              <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+              <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+              <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+              <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+              <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+              <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+            </svg>
+            <span>MOSAIC LABS</span>
+          </a>
+          <p class="footer-tagline">Making real-world data computable.</p>
+        </div>
+        <div>
+          <div class="footer-nav-title">Navigation</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="what-we-do.html" class="footer-link">What We Do</a></li>
+            <li class="footer-link-item"><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li class="footer-link-item"><a href="about.html" class="footer-link">About</a></li>
+            <li class="footer-link-item"><a href="insights.html" class="footer-link">Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-nav-title">Contact</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="#" class="footer-link" data-open-consultation>Consultation Request</a></li>
+            <li class="footer-link-item"><span class="footer-link" style="color: var(--ink-muted);">hello@mosaiclabs.com</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 MOSAIC LABS INC. ALL RIGHTS RESERVED.</div>
+        <div>PTP SYNC // DETERMINISTIC CANONICAL TRUTH</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

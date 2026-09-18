@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mosaic Labs — The Physical-World Data Layer</title>
+  <meta name="description" content="Mosaic Labs makes real-world data computable. We build the physical data layer connecting raw sensor feeds to intelligence and autonomous action.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='211 140 801 757'><path fill='%23ffb502' d='M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z'/></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       ARCHITECTURAL GRID LINES
+       ======================================================================== -->
+  <div class="arch-grid-lines" aria-hidden="true">
+    <div class="arch-grid-line-left"></div>
+    <div></div>
+    <div class="arch-grid-line-right"></div>
+  </div>
+
+  <!-- ========================================================================
+       REFINED FAST ENTRANCE (1.4s Assembly)
+       ======================================================================== -->
+  <div class="entrance-overlay" id="entranceOverlay">
+    <canvas id="entranceCanvas"></canvas>
+    <div class="entrance-status">CALIBRATING LIVING DATA ENGINE</div>
+  </div>
+
+  <!-- ========================================================================
+       PERSISTENT NAVIGATION
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#hero" class="brand-link" aria-label="Mosaic Labs Home">
+        <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+          <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+          <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+          <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+          <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+          <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+          <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+          <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+          <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+          <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+        </svg>
+        <span>MOSAIC LABS</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#data-river" class="nav-item-link">Data Layer</a></li>
+          <li><a href="#loop-narrative" class="nav-item-link">The Loop</a></li>
+          <li><a href="#what-we-do" class="nav-item-link">What We Do</a></li>
+          <li><a href="#solutions" class="nav-item-link">Solutions</a></li>
+          <li><a href="#about" class="nav-item-link">About</a></li>
+          <li><a href="#insights" class="nav-item-link">Insights</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <button class="cta-pill cta-pill-solid" data-open-consultation>
+          Work With Us <span class="arrow-icon">→</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="appContainer">
+
+    <!-- ======================================================================
+         1. HERO — “THE DATA FLOW” & LIVING MOSAIC LAYER
+         ====================================================================== -->
+    <section class="section hero-section" id="hero">
+      <div class="container">
+        
+        <div class="hero-heading-block" data-reveal>
+          <div class="section-eyebrow">The Physical Data Layer</div>
+          <h1 class="hero-display">
+            Making real-world data <span class="accent-word">computable</span>.
+          </h1>
+          <p class="hero-desc">
+            Mosaic Labs builds the layer that turns fragmented real-world data into structured intelligence and actionable systems.
+          </p>
+        </div>
+
+        <!-- THE LIVING DATA RIVER INTERACTIVE SYSTEM -->
+        <div class="data-river-wrapper" id="data-river" data-reveal>
+          <div class="data-river-header">
+            <div class="river-live-tag">
+              <span class="pulse-dot"></span>
+              <span>LIVE DATA ENGINE // REAL WORLD → MOSAIC LAYER → ACTION</span>
+            </div>
+
+            <div class="river-legend">
+              <div class="legend-step">
+                <span>01 REAL WORLD</span>
+                <span class="legend-arrow">→</span>
+              </div>
+              <div class="legend-step">
+                <span>02 RAW STREAM</span>
+                <span class="legend-arrow">→</span>
+              </div>
+              <div class="legend-step" style="color: var(--accent-amber);">
+                <span>03 MOSAIC DATA LAYER</span>
+                <span class="legend-arrow">→</span>
+              </div>
+              <div class="legend-step">
+                <span>04 INTELLIGENCE</span>
+                <span class="legend-arrow">→</span>
+              </div>
+              <div class="legend-step">
+                <span>05 ACTION LOOP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Source Selector Bar -->
+          <div class="emitter-sources-bar">
+            <button class="emitter-chip active" data-source="ALL">
+              <span class="chip-dot"></span> All Sources (41 Feeds)
+            </button>
+            <button class="emitter-chip" data-source="VEHICLE">
+              <span class="chip-dot"></span> Autonomous Vehicles
+            </button>
+            <button class="emitter-chip" data-source="SENSOR">
+              <span class="chip-dot"></span> Multi-Modal Sensors
+            </button>
+            <button class="emitter-chip" data-source="INFRASTRUCTURE">
+              <span class="chip-dot"></span> Smart Infrastructure
+            </button>
+            <button class="emitter-chip" data-source="ENERGY">
+              <span class="chip-dot"></span> BESS & Energy Grid
+            </button>
+          </div>
+
+          <!-- Live Interactive Canvas Viewport -->
+          <div class="river-viewport">
+            <canvas id="dataRiverCanvas"></canvas>
+
+            <!-- Dynamic Telemetry HUD Inspection Card -->
+            <div class="source-inspection-hud" id="sourceInspectionHud">
+              <div class="hud-source-title">
+                <span id="hudTitle">Source Telemetry</span>
+                <span style="font-size: 9px; color: var(--ink-muted);">IEEE 1588 PTP</span>
+              </div>
+              <div id="hudFields"></div>
+            </div>
+          </div>
+
+          <div class="river-caption">
+            <div>
+              <span>SOURCE INGESTION: <span class="metric-amber">120.4k pkts/sec</span></span>
+              <span style="margin-left: 20px;">CLOCK DRIFT: <span class="metric-amber">&lt;0.01ns/s</span></span>
+              <span style="margin-left: 20px;">FEEDBACK LATENCY: <span class="metric-amber">0.008ms</span></span>
+            </div>
+            <div>
+              <span>CLICK ANY SOURCE CHIP TO TRACE INDIVIDUAL PACKET LIFECYCLE</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. SCROLL = DATA TRANSFORMATION (THE 7-STAGE CONTINUOUS LOOP)
+         ====================================================================== -->
+    <section class="section" id="loop-narrative">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        
+        <div data-reveal>
+          <div class="section-eyebrow">The Continuous Data Cycle</div>
+          <h2 class="section-title">The loop that connects machines to decisions.</h2>
+          <p class="section-subtitle">
+            Mosaic isn’t merely a dashboard or analytics layer. It is an intelligent system connecting physical systems to decisions—and feeding those actions back into reality.
+          </p>
+        </div>
+
+        <div class="loop-narrative-container">
+          <!-- Left Column: Scroll Stages -->
+          <div class="stages-scroller">
+            
+            <div class="stage-card active-stage" data-stage-num="0">
+              <div class="stage-num">STAGE 01 — REAL WORLD</div>
+              <h3 class="stage-title">Physical Systems Produce Signals</h3>
+              <p class="stage-body">
+                Vehicles roll, inverters switch, strain gauges flex, and environmental sensors sample reality. Physical assets continuously generate raw pulses of spatial, electrical, and thermal telemetry.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="1">
+              <div class="stage-num">STAGE 02 — RAW DATA</div>
+              <h3 class="stage-title">Signals Become Fragmented Streams</h3>
+              <p class="stage-body">
+                Hardware clocks drift by milliseconds. Packets arrive out of sequence. High vibration causes intermittent packet drop and coordinate jitter across disparate protocols.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="2">
+              <div class="stage-num">STAGE 03 — MOSAIC DATA LAYER</div>
+              <h3 class="stage-title">Streams Enter The Mosaic Layer</h3>
+              <p class="stage-body">
+                Mosaic's edge engine enforces hardware-level PTP atomic timing. Asynchronous feeds are reconciled into deterministic, lossless ring buffers with zero drift.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="3">
+              <div class="stage-num">STAGE 04 — STRUCTURE</div>
+              <h3 class="stage-title">Data Organizes Itself</h3>
+              <p class="stage-body">
+                Spatial frames are calibrated in real time. Disparate sensor modalities are fused into a normalized geometric tensor lattice. Chaos becomes order.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="4">
+              <div class="stage-num">STAGE 05 — INTELLIGENCE</div>
+              <h3 class="stage-title">Patterns Emerge from Structure</h3>
+              <p class="stage-body">
+                With ground-truth precision guaranteed, high-assurance machine learning models detect micro-anomalies, energy bottlenecks, and predictive failure signatures.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="5">
+              <div class="stage-num">STAGE 06 — DECISION</div>
+              <h3 class="stage-title">Patterns Become Decisions</h3>
+              <p class="stage-body">
+                Autonomous policies synthesize immediate recommendations: dynamically re-route vehicle clusters, ramp down battery inverter heat, or tension structural cables.
+              </p>
+            </div>
+
+            <div class="stage-card" data-stage-num="6">
+              <div class="stage-num">STAGE 07 — ACTION & THE LOOP</div>
+              <h3 class="stage-title">Action Feeds Back to Reality</h3>
+              <p class="stage-body">
+                The decision actuates physical hardware in the real world. The physical system changes state, emitting fresh telemetry—and the intelligent loop begins anew.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Sticky Live State Visualizer -->
+          <div class="sticky-stage-viz">
+            <div class="section-eyebrow" style="margin-bottom: 14px;">Stage Visualizer</div>
+            <div class="stage-canvas-box">
+              <canvas id="stageCanvas"></canvas>
+            </div>
+            <div class="stage-viz-footer">
+              <span id="stageStatusText">PHYSICAL SYSTEMS GENERATING SIGNALS</span>
+              <span style="color: var(--accent-amber);">SYNCED</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. WHAT WE DO (Editorial Panels with Embedded Visualizers)
+         ====================================================================== -->
+    <section class="section" id="what-we-do">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        
+        <div data-reveal>
+          <div class="section-eyebrow">Core Capabilities</div>
+          <h2 class="section-title">Engineered for mission-critical operations.</h2>
+          <p class="section-subtitle">
+            Three interconnected pillars providing enterprise-grade capture, transformation, and physical deployment.
+          </p>
+        </div>
+
+        <div class="capabilities-panels" data-reveal>
+          <!-- Panel 01 -->
+          <div class="editorial-panel">
+            <div>
+              <div class="panel-mini-viz">
+                <canvas id="vizInfra"></canvas>
+              </div>
+              <div class="panel-header">
+                <span class="panel-num">01</span>
+                <span class="panel-tag">Infrastructure</span>
+              </div>
+              <h3 class="panel-title">Data Infrastructure</h3>
+              <p class="panel-body">
+                Hardware-hardened compute nodes, FPGA PTP clocks, and lossless ring-buffer architectures that capture extreme sensor streams under harsh environmental load.
+              </p>
+              <ul class="panel-specs">
+                <li class="panel-spec-item">Sub-10ns IEEE 1588 PTP hardware sync</li>
+                <li class="panel-spec-item">14.8x real-time lossless telemetry compression</li>
+                <li class="panel-spec-item">Zero-drop ring buffer memory bus</li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <span>View Specifications</span>
+              <span class="panel-arrow">→</span>
+            </div>
+          </div>
+
+          <!-- Panel 02 -->
+          <div class="editorial-panel">
+            <div>
+              <div class="panel-mini-viz">
+                <canvas id="vizIntel"></canvas>
+              </div>
+              <div class="panel-header">
+                <span class="panel-num">02</span>
+                <span class="panel-tag">Intelligence</span>
+              </div>
+              <h3 class="panel-title">Intelligence</h3>
+              <p class="panel-body">
+                Continuous online calibration engines that resolve spatial drift across LiDAR, cameras, and IMUs, synthesizing verified multi-modal ground truth.
+              </p>
+              <ul class="panel-specs">
+                <li class="panel-spec-item">Real-time online intrinsic/extrinsic calibration</li>
+                <li class="panel-spec-item">Multi-modal geometric fusion matrix</li>
+                <li class="panel-spec-item">Cryptographically signed data provenance</li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <span>View Models</span>
+              <span class="panel-arrow">→</span>
+            </div>
+          </div>
+
+          <!-- Panel 03 -->
+          <div class="editorial-panel">
+            <div>
+              <div class="panel-mini-viz">
+                <canvas id="vizReal"></canvas>
+              </div>
+              <div class="panel-header">
+                <span class="panel-num">03</span>
+                <span class="panel-tag">Real-World Systems</span>
+              </div>
+              <h3 class="panel-title">Real-World Systems</h3>
+              <p class="panel-body">
+                Closed-loop integrations across autonomous mobility fleets, power substations, and civil infrastructure with guaranteed 99.999% SLA availability.
+              </p>
+              <ul class="panel-specs">
+                <li class="panel-spec-item">Field-proven across 40+ deployed environments</li>
+                <li class="panel-spec-item">Direct connectors for ROS2, PyTorch, and Arrow</li>
+                <li class="panel-spec-item">Closed-loop autonomous actuation rails</li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <span>View Deployments</span>
+              <span class="panel-arrow">→</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. SOLUTIONS (Energy & Mobility / Smart Infrastructure)
+         ====================================================================== -->
+    <section class="section" id="solutions">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        
+        <div data-reveal>
+          <div class="section-eyebrow">Enterprise Domains</div>
+          <h2 class="section-title">Worlds we empower.</h2>
+          <p class="section-subtitle">
+            Deploying high-assurance computation into complex physical systems that cannot afford latency, clock drift, or calibration failure.
+          </p>
+        </div>
+
+        <div class="solutions-world-grid" data-reveal>
+          <!-- Solution 1: Energy & Mobility -->
+          <div class="world-card">
+            <div class="world-canvas-container">
+              <canvas id="energyCanvas" class="world-canvas"></canvas>
+            </div>
+            <div class="world-card-content">
+              <div class="world-eyebrow">Domain 01</div>
+              <h3 class="world-title">Energy & Mobility</h3>
+              <p class="world-desc">
+                Harmonizing dynamic telemetry across commercial EV charging fleets, battery energy storage systems (BESS), and transit corridors to balance grid demand in real time.
+              </p>
+              <div class="world-metrics">
+                <div>
+                  <div class="world-metric-val">41 FEEDS</div>
+                  <div class="world-metric-lbl">Reconciled to 1 truth</div>
+                </div>
+                <div>
+                  <div class="world-metric-val">9d → &lt;2s</div>
+                  <div class="world-metric-lbl">Reporting lag reduction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 2: Smart Infrastructure -->
+          <div class="world-card">
+            <div class="world-canvas-container">
+              <canvas id="infraCanvas" class="world-canvas"></canvas>
+            </div>
+            <div class="world-card-content">
+              <div class="world-eyebrow">Domain 02</div>
+              <h3 class="world-title">Smart Infrastructure</h3>
+              <p class="world-desc">
+                Continuous structural health monitoring and environmental sensory arrays for bridges, tunnels, and logistics facilities, feeding predictive digital twins.
+              </p>
+              <div class="world-metrics">
+                <div>
+                  <div class="world-metric-val">100%</div>
+                  <div class="world-metric-lbl">Audit reproducibility</div>
+                </div>
+                <div>
+                  <div class="world-metric-val">0.00ns</div>
+                  <div class="world-metric-lbl">Clock drift tolerance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. ABOUT (Manifesto)
+         ====================================================================== -->
+    <section class="section" id="about">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div class="about-manifesto" data-reveal>
+          <div class="section-eyebrow">Manifesto</div>
+          <h2 class="about-headline">
+            "We're building the layer between the physical world and intelligence."
+          </h2>
+
+          <div class="about-pillars">
+            <div>
+              <div class="pillar-label">OUR MISSION</div>
+              <h3 class="pillar-statement">Make real-world data computable.</h3>
+              <p class="pillar-body">
+                Artificial intelligence is only as capable as the physical grounding of its training and inference data. We eliminate the noise, drift, and fragmentation that stand between physical systems and true algorithmic comprehension.
+              </p>
+            </div>
+
+            <div>
+              <div class="pillar-label">OUR VISION</div>
+              <h3 class="pillar-statement">A world where physical systems can think, adapt and improve.</h3>
+              <p class="pillar-body">
+                When machines can interpret their operating environments with sub-millisecond precision, energy becomes cleaner, transportation becomes autonomous, and critical infrastructure heals itself.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. INSIGHTS (Research Journal)
+         ====================================================================== -->
+    <section class="section" id="insights">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div data-reveal>
+          <div class="section-eyebrow">Research Journal</div>
+          <h2 class="section-title">Technical publications & systems theory.</h2>
+          <p class="section-subtitle">
+            Rigorous investigations into physical clock synchronization, geometric sensor calibration, and high-throughput edge telemetry.
+          </p>
+        </div>
+
+        <div class="insights-journal-list" data-reveal>
+          <a href="#" class="journal-entry">
+            <span class="journal-date">2026.08.14</span>
+            <div>
+              <h3 class="journal-title">Sub-Millisecond PTP Synchronization in Dynamic Multi-Sensor Fleets</h3>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                Examining clock skew propagation across heterogeneous CAN-FD, automotive Ethernet, and GMSL2 bus lines under extreme thermal and mechanical vibration.
+              </p>
+            </div>
+            <span class="journal-category">ARCHITECTURE</span>
+            <span class="journal-arrow">→</span>
+          </a>
+
+          <a href="#" class="journal-entry">
+            <span class="journal-date">2026.06.28</span>
+            <div>
+              <h3 class="journal-title">Resolving 41 Asynchronous Feeds into a Deterministic Ground Truth</h3>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                A mathematical framework for continuous Kalman-Bucy multi-sensor temporal reconciliation without introducing buffer bloat or latency penalties.
+              </p>
+            </div>
+            <span class="journal-category">CALIBRATION</span>
+            <span class="journal-arrow">→</span>
+          </a>
+
+          <a href="#" class="journal-entry">
+            <span class="journal-date">2026.04.10</span>
+            <div>
+              <h3 class="journal-title">Why Edge Preprocessing is the Prerequisite for Autonomous Intelligence</h3>
+              <p class="panel-body" style="margin-top: 8px; margin-bottom: 0;">
+                Why streaming raw sensor feeds directly to cloud GPU clusters introduces catastrophic failure modes, and how deterministic edge gating restores safety margins.
+              </p>
+            </div>
+            <span class="journal-category">FOUNDATIONS</span>
+            <span class="journal-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. WORK WITH US (Architectural Statement Banner)
+         ====================================================================== -->
+    <section class="section" style="border-bottom: none; padding-bottom: 40px;">
+      <div class="container">
+        <div class="work-banner" data-reveal>
+          <div class="work-banner-inner">
+            <div class="section-eyebrow" style="color: var(--accent-amber);">Initiate Architecture</div>
+            <h2 class="work-banner-title">
+              Turn your physical telemetry into decision-ready intelligence.
+            </h2>
+            <p class="work-banner-desc">
+              Collaborate directly with our systems engineers to deploy high-assurance data capture and preprocessing pipelines tailored to your fleet or infrastructure.
+            </p>
+            <button class="cta-pill cta-pill-solid" data-open-consultation>
+              Work With Us <span class="arrow-icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       CONSULTATION MODAL DRAWER
+       ====================================================================== -->
+  <div class="modal-overlay" id="consultationModal">
+    <div class="modal-drawer">
+      <div>
+        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close dialog">
+          <span>ESC</span> [✕]
+        </button>
+
+        <div class="section-eyebrow">Deployment Inquiry</div>
+        <h3 class="modal-title">Deploy Your Data Pipeline</h3>
+        <p class="modal-desc">
+          Tell us about your sensor feeds, clock synchronization challenges, or telemetry bottlenecks. A Mosaic systems engineer will review your specification.
+        </p>
+
+        <form class="modal-form" id="consultationForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Dr. Alexis Vance" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <input type="email" class="form-input" placeholder="alexis@autonomous.io" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Domain Focus</label>
+            <select class="form-select">
+              <option>Energy & Mobility</option>
+              <option>Smart Infrastructure</option>
+              <option>Autonomous Robotics / Fleets</option>
+              <option>Industrial Sensor Systems</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">System Bottleneck / Feeds</label>
+            <textarea class="form-textarea" rows="3" placeholder="Briefly describe your hardware modalities, clock drift, or ingestion throughput..."></textarea>
+          </div>
+
+          <button type="submit" class="cta-pill cta-pill-solid" style="width: 100%; justify-content: center; margin-top: 8px;">
+            Submit Architecture Request →
+          </button>
+        </form>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted); margin-top: 32px;">
+        SECURE ENTERPRISE INGESTION // MOSAIC LABS INC.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="#hero" class="brand-link">
+            <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+              <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+              <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+              <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+              <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+              <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+              <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+              <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+              <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+              <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+            </svg>
+            <span>MOSAIC LABS</span>
+          </a>
+          <p class="footer-tagline">
+            Making real-world data computable. Building high-assurance capture and preprocessing infrastructure for AI and physical systems.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-nav-title">Navigation</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="what-we-do.html" class="footer-link">What We Do</a></li>
+            <li class="footer-link-item"><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li class="footer-link-item"><a href="about.html" class="footer-link">About</a></li>
+            <li class="footer-link-item"><a href="insights.html" class="footer-link">Insights</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-nav-title">Contact & Blueprints</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="#" class="footer-link" data-open-consultation>Consultation Request</a></li>
+            <li class="footer-link-item"><span class="footer-link" style="color: var(--ink-muted);">San Francisco, CA</span></li>
+            <li class="footer-link-item"><span class="footer-link" style="color: var(--ink-muted);">hello@mosaiclabs.com</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 MOSAIC LABS INC. ALL RIGHTS RESERVED.</div>
+        <div>PTP SYNC // DETERMINISTIC CANONICAL TRUTH</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/intro-glitch.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
