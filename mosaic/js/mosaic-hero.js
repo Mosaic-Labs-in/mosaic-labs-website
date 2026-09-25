@@ -1,5 +1,5 @@
 /**
- * MOSAIC LABS — HERO DATA CANVAS ENGINE
+ * MOSAIC LABS - HERO DATA CANVAS ENGINE
  * Recreates the Mosaic Labs logo mark with cascading numbers and data telemetry
  * inspired by the motion graphics reference (Pinterest: pin.it/4VayblXDe).
  */
@@ -25,9 +25,9 @@
   const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const HEX_GLYPHS = ['0x1F', '0xA4', '0xC2', '0x8E', '0x5B', '0xFF', '0x3D', '0x70'];
   const TELEMETRY_SNIPPETS = [
-    'LAT: 37.7749', 'LON:-122.4194', 'HZ: 120.0', 'RMS: 0.002',
-    'IMU: ±0.01g', 'LIDAR: 1.2M', 'CAN: 0x4F0', 'GPS: LOCK',
-    'TIME: 18:26.4', 'SYNC: 0.01ms', 'QoS: 99.99%', 'LOSS: 0.00%'
+    'DATA: INGEST', 'SCHEMA: PARQUET', 'FORMAT: COCO', 'QA: VERIFIED',
+    'REDACT: PII_CLEAR', 'PROV: SIGNED', 'FEED: ACTIVE', 'STATUS: READY',
+    'SOURCE: PARTNER', 'STAGE: STRUCTURING', 'TIER: BENCHMARK', 'LIC: AUDITED'
   ];
 
   // Colors from brand palette

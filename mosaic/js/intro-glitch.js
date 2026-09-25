@@ -1,5 +1,5 @@
 /**
- * MOSAIC LABS — REFINED ENTRANCE SEQUENCE
+ * MOSAIC LABS - REFINED ENTRANCE SEQUENCE
  * Sequence:
  * 1. Subtle dark background (#0d0d0e)
  * 2. Small Mosaic mark fragments appear at center

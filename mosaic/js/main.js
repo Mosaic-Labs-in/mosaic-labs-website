@@ -1,5 +1,5 @@
 /**
- * MOSAIC LABS — THE LIVING DATA LAYER & RIVER ENGINE (STRICT EDITORIAL LIGHT THEME)
+ * MOSAIC LABS - THE LIVING DATA LAYER & RIVER ENGINE (STRICT EDITORIAL LIGHT THEME)
  * Palette:
  * - #4d111c (Burgundy)
  * - #ffffff (Pure White)
@@ -69,54 +69,42 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeRiver();
     window.addEventListener('resize', resizeRiver);
 
-    // Physical Sources (Real World - Left side)
+    // Physical Sources (Mosaic Acquisition Channels - Left side)
     const SOURCES = [
       {
-        id: 'VEHICLE',
-        name: 'Autonomous Vehicle Fleet',
-        yRatio: 0.22,
+        id: 'DOWNLOAD',
+        name: 'Download Channels',
+        yRatio: 0.24,
         color: '#ffb502',
         telemetry: {
-          'LOCATION': '+37.7749°N, -122.4194°W',
-          'VELOCITY': '64.2 km/h',
-          'BATTERY': '84.2% SoC',
-          'PTP_OFFSET': '0.006ms'
+          'ACQUISITION': 'Public Portals, APIs & Open Archives',
+          'VERIFICATION': 'Pre-Ingest Legal Usability Checks',
+          'PROCESSING': 'Automated Deduplication & Cleanup',
+          'DELIVERY': 'Standardized Schema-Driven Records'
         }
       },
       {
-        id: 'SENSOR',
-        name: 'Multi-Modal Sensor Arrays',
-        yRatio: 0.40,
+        id: 'CAPTURE',
+        name: 'Field Capture',
+        yRatio: 0.50,
         color: '#4d111c',
         telemetry: {
-          'MODALITIES': 'LiDAR + GMSL2 + IMU',
-          'FRAME_RATE': '120.4 fps',
-          'VIBRATION': '0.0024 RMS',
-          'CLOCK_JITTER': '8.2ns'
+          'ACQUISITION': 'Cameras, Drones, Dashcams & Sensors',
+          'COVERAGE': 'Target Physical Deployments',
+          'PRIVACY': 'Redaction at Point of Collection',
+          'DELIVERY': 'AI-Ready Labeled Datasets'
         }
       },
       {
-        id: 'INFRASTRUCTURE',
-        name: 'Civil & Structural Grid',
-        yRatio: 0.58,
+        id: 'PARTNER',
+        name: 'Partner Data Streams',
+        yRatio: 0.76,
         color: '#272727',
         telemetry: {
-          'UTILIZATION': '88.4% Capacity',
-          'STRAIN_GAUGE': '14.2 µm/m',
-          'GRID_STRESS': 'NORMAL',
-          'DEMAND_PEAK': '42.8 MW'
-        }
-      },
-      {
-        id: 'ENERGY',
-        name: 'BESS & Inverter Matrix',
-        yRatio: 0.76,
-        color: '#ffb502',
-        telemetry: {
-          'FREQUENCY': '60.002 Hz',
-          'PHASE_BALANCE': '99.98%',
-          'INVERTER_FLUX': '4.82 MWh',
-          'SLO_UPTIME': '100.0%'
+          'ACQUISITION': 'Utilities & Infrastructure Operators',
+          'INGESTION': 'Bilateral Enterprise Integration',
+          'COMPLIANCE': 'DPDP-Aligned Consent & Governance',
+          'DELIVERY': 'Ongoing Subscription Feeds'
         }
       }
     ];
@@ -245,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fill();
 
         // Label
-        ctx.font = '600 9.5px "JetBrains Mono", monospace';
+        ctx.font = '600 10.5px "Inter", sans-serif';
         ctx.fillStyle = isSelected ? '#4d111c' : '#827d73';
         ctx.fillText(src.id, leftX + 20, sy + 3.5);
       });
@@ -298,23 +286,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Title over Mosaic Layer
-      ctx.font = '600 10px "JetBrains Mono", monospace';
+      ctx.font = '600 10.5px "Inter", sans-serif';
       ctx.fillStyle = '#4d111c';
       ctx.fillText('MOSAIC DATA LAYER', mosaicCx - 58, mosaicCy - mosaicH / 2 - 8);
 
       // Subtitle status
-      ctx.font = '500 8.5px "JetBrains Mono", monospace';
+      ctx.font = '500 9px "Inter", sans-serif';
       ctx.fillStyle = '#272727';
-      ctx.fillText('PTP CLOCK LOCK: 0.008ms // TENSOR NORMALIZED', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
+      ctx.fillText('PROCESSING & ANNOTATION // AI-READY QUALITY', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
 
       // -------------------------------------------------------------
       // 3. RENDER INTELLIGENCE & DECISIONS (RIGHT)
       // -------------------------------------------------------------
       const rightX = cw - 64;
       const DECISIONS = [
-        { label: 'OPTIMIZE_GRID_FEED', yRatio: 0.32 },
-        { label: 'REROUTE_FLEET_04',  yRatio: 0.50 },
-        { label: 'CALIBRATE_IMU_SYNC', yRatio: 0.68 }
+        { label: 'STRUCTURED_AI_DATASET', yRatio: 0.32 },
+        { label: 'PROVENANCE_REPORT',      yRatio: 0.50 },
+        { label: 'ONGOING_DATA_FEED',     yRatio: 0.68 }
       ];
 
       DECISIONS.forEach((dec) => {
@@ -331,9 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.strokeStyle = 'rgba(77, 17, 28, 0.4)';
         ctx.stroke();
 
-        ctx.font = '600 9px "JetBrains Mono", monospace';
+        ctx.font = '600 9px "Inter", sans-serif';
         ctx.fillStyle = '#272727';
-        ctx.fillText(dec.label, rightX - 120, dy - 8);
+        ctx.fillText(dec.label, rightX - 146, dy - 8);
       });
 
       // -------------------------------------------------------------
@@ -346,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isFiltered) return;
 
         const startY = ch * p.source.yRatio;
-        const targetY = mosaicCy + ((p.sourceIdx - 1.5) * 35);
+        const targetY = mosaicCy + ((p.sourceIdx - 1.0) * 40);
         const exitY = ch * (0.32 + (p.idx % 3) * 0.18);
 
         let px, py;
@@ -379,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
         } else {
-          // STAGE 3: EXITING MOSAIC INTO INTELLIGENCE & DECISIONS
+          // STAGE 3: EXITING MOSAIC INTO DELIVERIES
           const t = (p.progress - 0.70) / 0.30;
           px = (mosaicCx + mosaicW / 2) + (rightX - (mosaicCx + mosaicW / 2)) * t;
           py = targetY + (exitY - targetY) * t;
@@ -408,9 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      ctx.font = '500 8.5px "JetBrains Mono", monospace';
+      ctx.font = '600 9px "Inter", sans-serif';
       ctx.fillStyle = '#4d111c';
-      ctx.fillText('← ACTION LOOP: DECISIONS ACTUATE PHYSICAL SYSTEMS (AUTONOMOUS FEEDBACK)', cw * 0.30, returnY - 6);
+      ctx.fillText('← DATA AS A SERVICE: CONTINUOUS REFRESH & VERSIONED DELIVERY PIPELINE', cw * 0.22, returnY - 6);
 
       // Return Pulses traveling from Right to Left
       for (let i = actionPulses.length - 1; i >= 0; i--) {
@@ -468,13 +456,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const statusEl = document.getElementById('stageStatusText');
             if (statusEl) {
               const titles = [
-                'PHYSICAL SYSTEMS GENERATING SIGNALS',
-                'UNSTRUCTURED ASYNCHRONOUS PACKETS',
-                'SUB-MILLISECOND PTP ATOMIC LOCK',
-                'CANONICAL MATRIX TENSOR RESOLUTION',
-                'PREDICTIVE PATTERN EMERGENCE',
-                'DETERMINISTIC ACTION GENERATION',
-                'CLOSED LOOP: HARDWARE ACTUATION'
+                '01 RAW REAL-WORLD SIGNALS',
+                '02 COLLECTION: DOWNLOAD, CAPTURE, PARTNER',
+                '03 PRE-PROCESSING & ANONYMIZATION',
+                '04 ANNOTATION & SCHEMA STRUCTURING',
+                '05 QUALITY ASSURANCE & AUDITING',
+                '06 PROVENANCE & CHAIN OF CUSTODY',
+                '07 DELIVERY: DATASETS, FEEDS & MODELS'
               ];
               statusEl.textContent = titles[currentStageIndex] || 'ACTIVE';
             }
@@ -537,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       } else {
-        // Stage 6 & 7: Decisions & Feedback Loop
+        // Stage 6 & 7: Deliveries & Ongoing Pipeline
         sctx.beginPath();
         sctx.arc(cx, cy, 64, 0, Math.PI * 2);
         sctx.strokeStyle = '#4d111c';
@@ -551,9 +539,9 @@ document.addEventListener('DOMContentLoaded', () => {
         sctx.fillStyle = '#ffb502';
         sctx.fill();
 
-        sctx.font = '600 10px "JetBrains Mono", monospace';
+        sctx.font = '600 10px "Inter", sans-serif';
         sctx.fillStyle = '#272727';
-        sctx.fillText('DECISION → ACTION LOOP', cx - 68, cy + 3.5);
+        sctx.fillText('DATA AS A SERVICE PIPELINE', cx - 74, cy + 3.5);
       }
 
       requestAnimationFrame(renderStage);
@@ -771,14 +759,14 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Transmitting Specification...';
+      btn.textContent = 'Submitting Data Inquiry...';
       btn.disabled = true;
 
       setTimeout(() => {
-        btn.textContent = 'Specification Transmitted ✓';
+        btn.textContent = 'Inquiry Received ✓';
         setTimeout(() => {
           form.reset();
-          btn.textContent = 'Submit Architecture Request →';
+          btn.textContent = 'Submit Data Inquiry →';
           btn.disabled = false;
           closeM();
         }, 1600);

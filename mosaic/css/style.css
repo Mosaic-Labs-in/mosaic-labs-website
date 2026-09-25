@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MOSAIC LABS — STRICT EDITORIAL LIGHT DESIGN SYSTEM
+   MOSAIC LABS - STRICT EDITORIAL LIGHT DESIGN SYSTEM
    Palette:
    - #4d111c (Burgundy)
    - #ffffff (Pure White)
@@ -8,7 +8,7 @@
    - #e5ded2 (Parchment)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* Strict 5-Color Foundation */
@@ -60,7 +60,7 @@
   --section-space: clamp(84px, 13vh, 168px);
 
   /* Typography */
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -215,9 +215,10 @@ body.cursor-hover .custom-cursor-ring {
 .entrance-status {
   position: absolute;
   bottom: 44px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.24em;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--parchment);
 }
@@ -264,8 +265,8 @@ body.cursor-hover .custom-cursor-ring {
   color: var(--ink-primary);
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -293,11 +294,11 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .nav-item-link {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
   font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-secondary);
   position: relative;
   padding: 8px 0;
@@ -338,12 +339,12 @@ body.cursor-hover .custom-cursor-ring {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 12px 22px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  padding: 11px 22px;
   border-radius: var(--radius-pill);
   transition: transform var(--duration-fast) var(--ease-out),
               background var(--duration-fast) ease,
@@ -436,15 +437,15 @@ body.cursor-hover .custom-cursor-ring {
 .arch-cross.tl { top: -6.5px; left: var(--gutter); }
 .arch-cross.tr { top: -6.5px; right: var(--gutter); }
 
-/* Monospace Eyebrow */
+/* Editorial Eyebrow */
 .section-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--burgundy);
   margin-bottom: 24px;
@@ -552,9 +553,9 @@ body.cursor-hover .custom-cursor-ring {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--burgundy);
   font-weight: 600;
@@ -578,9 +579,10 @@ body.cursor-hover .custom-cursor-ring {
   display: flex;
   align-items: center;
   gap: 24px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--ink-muted);
   text-transform: uppercase;
   flex-wrap: wrap;
@@ -610,10 +612,11 @@ body.cursor-hover .custom-cursor-ring {
   border: 1px solid var(--border-line);
   border-radius: var(--radius-sm);
   background: var(--bg-subtle);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-secondary);
   display: inline-flex;
   align-items: center;
@@ -681,9 +684,9 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .hud-source-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
   color: var(--burgundy);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -696,9 +699,9 @@ body.cursor-hover .custom-cursor-ring {
 .hud-field {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
   margin-bottom: 4px;
 }
 
@@ -709,8 +712,9 @@ body.cursor-hover .custom-cursor-ring {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
   color: var(--ink-muted);
   margin-top: 16px;
   flex-wrap: wrap;
@@ -762,9 +766,9 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .stage-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
   color: var(--burgundy);
   margin-bottom: 12px;
   text-transform: uppercase;
@@ -819,8 +823,10 @@ body.cursor-hover .custom-cursor-ring {
   margin-top: 18px;
   padding-top: 14px;
   border-top: 1px solid var(--border-line);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   color: var(--ink-muted);
 }
 
@@ -888,17 +894,18 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .panel-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--burgundy);
 }
 
 .panel-tag {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--ink-muted);
   text-transform: uppercase;
 }
@@ -931,9 +938,10 @@ body.cursor-hover .custom-cursor-ring {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-muted);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
   margin-bottom: 10px;
 }
 
@@ -947,12 +955,12 @@ body.cursor-hover .custom-cursor-ring {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--burgundy);
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--burgundy);
 }
 
 .panel-arrow {
@@ -1014,13 +1022,13 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .world-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   color: var(--burgundy);
   text-transform: uppercase;
   margin-bottom: 12px;
-  font-weight: 600;
 }
 
 .world-title {
@@ -1055,11 +1063,12 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .world-metric-lbl {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-muted);
-  text-transform: uppercase;
   margin-top: 4px;
 }
 
@@ -1097,13 +1106,13 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .pillar-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.22em;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--burgundy);
   margin-bottom: 14px;
-  font-weight: 600;
 }
 
 .pillar-statement {
@@ -1163,9 +1172,10 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .journal-date {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--ink-muted);
 }
 
@@ -1179,17 +1189,17 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .journal-category {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--burgundy);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .journal-arrow {
-  font-family: var(--font-mono);
-  font-size: 16px;
+  font-family: var(--font-body);
+  font-size: 18px;
   color: var(--ink-muted);
   text-align: right;
   transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast);
@@ -1279,10 +1289,10 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .footer-nav-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--burgundy);
   margin-bottom: 20px;
@@ -1297,9 +1307,9 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .footer-link {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
   color: var(--ink-secondary);
   transition: color var(--duration-fast) ease;
 }
@@ -1314,9 +1324,9 @@ body.cursor-hover .custom-cursor-ring {
   align-items: center;
   padding-top: 32px;
   border-top: 1px solid var(--border-line);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.02em;
   color: var(--ink-muted);
   flex-wrap: wrap;
   gap: 16px;
@@ -1365,9 +1375,10 @@ body.cursor-hover .custom-cursor-ring {
 
 .modal-close-btn {
   align-self: flex-end;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--ink-muted);
   display: flex;
   align-items: center;
@@ -1409,9 +1420,9 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .form-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--burgundy);
   font-weight: 600;
