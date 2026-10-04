@@ -444,39 +444,66 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeStage();
     window.addEventListener('resize', resizeStage);
 
-    // Scroll Observer for Stages
+    // Reliable scroll tracking for stages
     const stageCards = document.querySelectorAll('.stage-card');
-    if ('IntersectionObserver' in window) {
-      const stageObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            stageCards.forEach(c => c.classList.remove('active-stage'));
-            entry.target.classList.add('active-stage');
-            currentStageIndex = parseInt(entry.target.getAttribute('data-stage-num') || '0', 10);
-            const statusEl = document.getElementById('stageStatusText');
-            if (statusEl) {
-              const titles = [
-                '01 RAW REAL-WORLD SIGNALS',
-                '02 COLLECTION: DOWNLOAD, CAPTURE, PARTNER',
-                '03 PRE-PROCESSING & ANONYMIZATION',
-                '04 ANNOTATION & SCHEMA STRUCTURING',
-                '05 QUALITY ASSURANCE & AUDITING',
-                '06 PROVENANCE & CHAIN OF CUSTODY',
-                '07 DELIVERY: DATASETS, FEEDS & MODELS'
-              ];
-              statusEl.textContent = titles[currentStageIndex] || 'ACTIVE';
-            }
-          }
-        });
-      }, { threshold: 0.5 });
+    let currentStageIndex = 0;
 
-      stageCards.forEach(card => stageObserver.observe(card));
+    function updateActiveStage() {
+      let activeIndex = currentStageIndex;
+      let minDistance = Infinity;
+      const centerY = window.innerHeight * 0.5;
+
+      stageCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height * 0.5;
+        const dist = Math.abs(cardCenter - centerY);
+        if (dist < minDistance) {
+          minDistance = dist;
+          activeIndex = parseInt(card.getAttribute('data-stage-num') || '0', 10);
+        }
+      });
+
+      if (activeIndex !== currentStageIndex || !document.querySelector('.active-stage')) {
+        currentStageIndex = activeIndex;
+        stageCards.forEach(c => c.classList.remove('active-stage'));
+        const activeCard = Array.from(stageCards).find(c => parseInt(c.getAttribute('data-stage-num') || '0', 10) === activeIndex);
+        if (activeCard) activeCard.classList.add('active-stage');
+      }
     }
 
+    window.addEventListener('scroll', updateActiveStage, { passive: true });
+    // Run once on load to set initial state
+    setTimeout(updateActiveStage, 100);
+
     let stageTime = 0;
+    let visualStageIndex = 0;
+    let frameCounter = 0;
+
     function renderStage() {
       sctx.clearRect(0, 0, scw, sch);
       stageTime += 0.02;
+
+      if (visualStageIndex !== currentStageIndex) {
+        frameCounter++;
+        if (frameCounter > 8) {
+          visualStageIndex += Math.sign(currentStageIndex - visualStageIndex);
+          frameCounter = 0;
+          
+          const statusEl = document.getElementById('stageStatusText');
+          if (statusEl) {
+            const titles = [
+              '01 RAW REAL-WORLD SIGNALS',
+              '02 COLLECTION: DOWNLOAD, CAPTURE, PARTNER',
+              '03 PRE-PROCESSING & ANONYMIZATION',
+              '04 ANNOTATION & SCHEMA STRUCTURING',
+              '05 QUALITY ASSURANCE & AUDITING',
+              '06 PROVENANCE & CHAIN OF CUSTODY',
+              '07 DELIVERY: DATASETS, FEEDS & MODELS'
+            ];
+            statusEl.textContent = titles[visualStageIndex] || 'ACTIVE';
+          }
+        }
+      }
 
       const cx = scw / 2;
       const cy = sch / 2;
@@ -484,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sctx.strokeStyle = '#e5ded2';
       sctx.strokeRect(20, 20, scw - 40, sch - 40);
 
-      if (currentStageIndex === 0) {
+      if (visualStageIndex === 0) {
         // Stage 1: Real World Physical Signals
         for (let i = 0; i < 18; i++) {
           const px = 40 + (i % 6) * ((scw - 80) / 5);
@@ -495,18 +522,18 @@ document.addEventListener('DOMContentLoaded', () => {
           sctx.fillStyle = i % 3 === 0 ? '#ffb502' : '#4d111c';
           sctx.fill();
         }
-      } else if (currentStageIndex <= 2) {
+      } else if (visualStageIndex <= 2) {
         // Stage 2 & 3: Raw Packets -> Entering Mosaic
         for (let i = 0; i < 24; i++) {
           const t = ((stageTime + i * 0.15) % 3) / 3;
           const px = 40 + t * (scw - 80);
-          const py = cy + Math.sin(t * 10 + i) * (currentStageIndex === 1 ? 28 : 5);
+          const py = cy + Math.sin(t * 10 + i) * (visualStageIndex === 1 ? 28 : 5);
           sctx.beginPath();
           sctx.arc(px, py, 2.8, 0, Math.PI * 2);
-          sctx.fillStyle = currentStageIndex === 2 ? '#4d111c' : '#ffb502';
+          sctx.fillStyle = visualStageIndex === 2 ? '#4d111c' : '#ffb502';
           sctx.fill();
         }
-      } else if (currentStageIndex <= 4) {
+      } else if (visualStageIndex <= 4) {
         // Stage 4 & 5: Structured Matrix & Intelligence
         const cols = 6;
         const rows = 6;
@@ -541,7 +568,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sctx.font = '600 10px "Inter", sans-serif';
         sctx.fillStyle = '#272727';
-        sctx.fillText('DATA AS A SERVICE PIPELINE', cx - 74, cy + 3.5);
+        sctx.textAlign = 'center';
+        sctx.fillText('DATA AS A SERVICE', cx, cy - 4);
+        sctx.fillText('PIPELINE', cx, cy + 10);
+        sctx.textAlign = 'start';
       }
 
       requestAnimationFrame(renderStage);
@@ -777,4 +807,44 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeM();
   });
+
+  // --------------------------------------------------------------------------
+  // NAVBAR SCROLL TRACKING
+  // --------------------------------------------------------------------------
+  const navLinks = document.querySelectorAll('.nav-item-link');
+  const sections = Array.from(navLinks).map(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      return document.getElementById(href.substring(1));
+    }
+    return null;
+  }).filter(Boolean);
+
+  function updateActiveNavLink() {
+    let currentActive = null;
+    const centerY = window.innerHeight * 0.4;
+    
+    for (const section of sections) {
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= centerY && rect.bottom >= 100) {
+          currentActive = section.id;
+        }
+      }
+    }
+
+    if (currentActive) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${currentActive}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+  setTimeout(updateActiveNavLink, 100);
+
 });

@@ -98,6 +98,16 @@
   opacity: 0.6;
 }
 
+.active {
+  color: var(--yellow);
+}
+
+.dash {
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
 .dropdown {
   position: absolute;
   top: 100%;

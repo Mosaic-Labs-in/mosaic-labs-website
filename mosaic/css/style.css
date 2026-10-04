@@ -308,10 +308,11 @@ body.cursor-hover .custom-cursor-ring {
 .nav-item-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
-  height: 1.5px;
+  height: 2px;
   background: var(--burgundy);
   transition: width var(--duration-normal) var(--ease-out);
 }
@@ -323,7 +324,7 @@ body.cursor-hover .custom-cursor-ring {
 
 .nav-item-link:hover::after,
 .nav-item-link.active::after {
-  width: 100%;
+  width: 16px;
 }
 
 .header-cta {
@@ -373,7 +374,6 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .cta-pill-solid:hover .arrow-icon {
-  transform: translateX(3px);
 }
 
 .cta-pill-ghost {
@@ -394,7 +394,6 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .cta-pill-ghost:hover .arrow-icon {
-  transform: translateX(3px);
 }
 
 /* --------------------------------------------------------------------------
@@ -969,7 +968,6 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .editorial-panel:hover .panel-arrow {
-  transform: translateX(4px);
 }
 
 /* --------------------------------------------------------------------------
@@ -1167,7 +1165,6 @@ body.cursor-hover .custom-cursor-ring {
 }
 
 .journal-entry:hover .journal-arrow {
-  transform: translateX(6px);
   color: var(--amber-gold);
 }
 
@@ -1273,7 +1270,7 @@ body.cursor-hover .custom-cursor-ring {
 
 @media (min-width: 860px) {
   .footer-top {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
   }
 }
 

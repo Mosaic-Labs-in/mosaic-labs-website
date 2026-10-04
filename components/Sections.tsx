@@ -269,8 +269,8 @@ function Contact() {
             Engagements start with a two-week source audit. We report what
             exists, what is broken, and what is worth building.
           </span>
-          <a href="mailto:hello@mosaiclabs.studio" className={styles.contactPill}>
-            hello@mosaiclabs.studio
+          <a href="mailto:contact@mosaiclabs.in" className={styles.contactPill}>
+            contact@mosaiclabs.in
           </a>
         </div>
       </div>
