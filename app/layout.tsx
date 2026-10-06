@@ -1,44 +1,43 @@
-import type { Metadata } from "next";
-import { JetBrains_Mono, Jost } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { ConsultationProvider } from "@/components/Consultation";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { SiteEffects } from "@/components/SiteEffects";
 import "./globals.css";
 
-const jost = Jost({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-jost",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Mosaic Labs — Here for all your data needs",
+  title: "Mosaic | Data as a Service for the Physical World",
   description:
-    "Mosaic Labs assembles scattered sources — partner fleets, sensors, custom hardware, warehouses and third-party exports — into structures your teams can act on.",
+    "Mosaic turns fragmented real-world data into structured, validated, AI-ready datasets. Data as a Service (DaaS) for Agriculture, Energy, Infrastructure, and Mobility.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${jost.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
-        {/* Without JS the intro sequence can never hand over, so show the site directly. */}
+        {/* Without JS nothing would ever reveal, and the intro would never hand over. */}
         <noscript>
-          <style>{`
-            [data-intro-layer]{display:none !important}
-            [data-site]{opacity:1 !important}
-            [data-reveal]{opacity:1 !important}
-          `}</style>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important}.entrance-overlay{display:none !important}`}</style>
         </noscript>
-        {children}
+
+        <div className="arch-grid-lines" aria-hidden="true">
+          <div className="arch-grid-line-left"></div>
+          <div></div>
+          <div className="arch-grid-line-right"></div>
+        </div>
+
+        <ConsultationProvider>
+          <Header />
+          <main id="appContainer">{children}</main>
+          <Footer />
+        </ConsultationProvider>
+
+        <SiteEffects />
       </body>
     </html>
   );

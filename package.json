@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx serve mosaic",
-    "build": "echo 'Mosaic Labs static site ready in mosaic/'",
-    "start": "npx serve mosaic",
-    "next:dev": "next dev",
-    "next:build": "next build",
-    "lint": "next lint",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
