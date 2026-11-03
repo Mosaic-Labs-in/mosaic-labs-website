@@ -698,6 +698,402 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(renderI);
   }
 
+  // AI Domain Canvas
+  const aiCanvas = document.getElementById('aiCanvas');
+  if (aiCanvas) {
+    const actx = aiCanvas.getContext('2d');
+    let aw = 0, ah = 0;
+    function resizeAI() {
+      const rect = aiCanvas.parentElement.getBoundingClientRect();
+      aw = rect.width;
+      ah = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      aiCanvas.width = Math.floor(aw * dpr);
+      aiCanvas.height = Math.floor(ah * dpr);
+      actx.scale(dpr, dpr);
+    }
+    resizeAI();
+    window.addEventListener('resize', resizeAI);
+
+    const layers = [3, 5, 5, 2];
+    let aiTime = 0;
+    function renderAI() {
+      actx.clearRect(0, 0, aw, ah);
+      aiTime += 0.02;
+
+      const layerX = layers.map((_, idx) => (aw / (layers.length + 1)) * (idx + 1));
+      const nodes = layers.map((count, lIdx) => {
+        const x = layerX[lIdx];
+        const stepY = ah / (count + 1);
+        const list = [];
+        for (let i = 1; i <= count; i++) {
+          list.push({ x, y: stepY * i + Math.sin(aiTime + i) * 3 });
+        }
+        return list;
+      });
+
+      // Connections
+      for (let l = 0; l < nodes.length - 1; l++) {
+        const current = nodes[l];
+        const next = nodes[l + 1];
+        for (let i = 0; i < current.length; i++) {
+          for (let j = 0; j < next.length; j++) {
+            actx.beginPath();
+            actx.moveTo(current[i].x, current[i].y);
+            actx.lineTo(next[j].x, next[j].y);
+            const active = Math.sin(aiTime * 2 + i + j + l) > 0.4;
+            actx.strokeStyle = active ? '#ffb502' : '#e5ded2';
+            actx.lineWidth = active ? 1.2 : 0.6;
+            actx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      nodes.forEach((layerNodes, lIdx) => {
+        layerNodes.forEach((n, nIdx) => {
+          actx.beginPath();
+          actx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+          actx.fillStyle = (lIdx + nIdx) % 2 === 0 ? '#4d111c' : '#ffb502';
+          actx.fill();
+          actx.strokeStyle = '#ffffff';
+          actx.lineWidth = 1;
+          actx.stroke();
+        });
+      });
+
+      requestAnimationFrame(renderAI);
+    }
+    requestAnimationFrame(renderAI);
+  }
+
+  // Infrastructure & Inspection Canvas (Card 04)
+  const inspectionCanvas = document.getElementById('inspectionCanvas');
+  if (inspectionCanvas) {
+    const sctx = inspectionCanvas.getContext('2d');
+    let sw = 0, sh = 0;
+    function resizeInspection() {
+      const rect = inspectionCanvas.parentElement.getBoundingClientRect();
+      sw = rect.width;
+      sh = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      inspectionCanvas.width = Math.floor(sw * dpr);
+      inspectionCanvas.height = Math.floor(sh * dpr);
+      sctx.scale(dpr, dpr);
+    }
+    resizeInspection();
+    window.addEventListener('resize', resizeInspection);
+
+    let inspTime = 0;
+    function renderInspection() {
+      sctx.clearRect(0, 0, sw, sh);
+      inspTime += 0.015;
+
+      // Road pavement grid lines
+      sctx.strokeStyle = '#f0ebe1';
+      sctx.lineWidth = 1;
+      const gridSpacing = 28;
+      const offset = (inspTime * 25) % gridSpacing;
+      for (let y = offset; y < sh; y += gridSpacing) {
+        sctx.beginPath();
+        sctx.moveTo(0, y);
+        sctx.lineTo(sw, y);
+        sctx.stroke();
+      }
+      for (let x = 0; x < sw; x += gridSpacing) {
+        sctx.beginPath();
+        sctx.moveTo(x, 0);
+        sctx.lineTo(x, sh);
+        sctx.stroke();
+      }
+
+      // Scanning sweep line
+      const scanY = (Math.sin(inspTime * 1.5) * 0.5 + 0.5) * (sh - 40) + 20;
+      sctx.beginPath();
+      sctx.moveTo(0, scanY);
+      sctx.lineTo(sw, scanY);
+      sctx.strokeStyle = '#ffb502';
+      sctx.lineWidth = 1.5;
+      sctx.stroke();
+
+      // Bounding box 1: Longitudinal Crack (IRC Standard)
+      const b1x = sw * 0.18;
+      const b1y = sh * 0.28 + Math.sin(inspTime) * 4;
+      sctx.strokeStyle = '#4d111c';
+      sctx.lineWidth = 1.2;
+      sctx.strokeRect(b1x, b1y, 110, 48);
+      sctx.fillStyle = '#4d111c';
+      sctx.font = '9px "JetBrains Mono", monospace';
+      sctx.fillText('CRACK-L: SEV 2', b1x + 6, b1y - 6);
+
+      // Defect crack squiggle inside box
+      sctx.beginPath();
+      sctx.moveTo(b1x + 12, b1y + 36);
+      sctx.lineTo(b1x + 35, b1y + 24);
+      sctx.lineTo(b1x + 58, b1y + 28);
+      sctx.lineTo(b1x + 92, b1y + 12);
+      sctx.strokeStyle = '#4d111c';
+      sctx.lineWidth = 1.5;
+      sctx.stroke();
+
+      // Bounding box 2: Pothole Detection
+      const b2x = sw * 0.58;
+      const b2y = sh * 0.45 - Math.sin(inspTime * 1.2) * 5;
+      sctx.strokeStyle = '#ffb502';
+      sctx.lineWidth = 1.2;
+      sctx.strokeRect(b2x, b2y, 88, 52);
+      sctx.fillStyle = '#ffb502';
+      sctx.fillText('POTHOLE: 16cm', b2x + 6, b2y - 6);
+
+      // Defect ellipse
+      sctx.beginPath();
+      sctx.ellipse(b2x + 44, b2y + 26, 26, 14, 0.2, 0, Math.PI * 2);
+      sctx.strokeStyle = '#ffb502';
+      sctx.lineWidth = 1.5;
+      sctx.stroke();
+
+      // Telemetry HUD tags
+      sctx.fillStyle = '#827d73';
+      sctx.font = '9px "JetBrains Mono", monospace';
+      sctx.fillText('SURVEY: NHAI-CORRIDOR-04', 16, sh - 14);
+      sctx.fillText('IRC-SPALL // VERIFIED', sw - 140, sh - 14);
+
+      requestAnimationFrame(renderInspection);
+    }
+    requestAnimationFrame(renderInspection);
+  }
+
+  // Voice & Speech Data Canvas (Card 05)
+  const voiceCanvas = document.getElementById('voiceCanvas');
+  if (voiceCanvas) {
+    const vctx = voiceCanvas.getContext('2d');
+    let vw = 0, vh = 0;
+    function resizeVoice() {
+      const rect = voiceCanvas.parentElement.getBoundingClientRect();
+      vw = rect.width;
+      vh = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      voiceCanvas.width = Math.floor(vw * dpr);
+      voiceCanvas.height = Math.floor(vh * dpr);
+      vctx.scale(dpr, dpr);
+    }
+    resizeVoice();
+    window.addEventListener('resize', resizeVoice);
+
+    let vTime = 0;
+    function renderVoice() {
+      vctx.clearRect(0, 0, vw, vh);
+      vTime += 0.025;
+
+      const tracks = [
+        { label: 'HINDI (HI-IN)', color: '#4d111c', yRatio: 0.28, freq: 0.03, amp: 22 },
+        { label: 'ENGLISH (EN-IN)', color: '#ffb502', yRatio: 0.54, freq: 0.04, amp: 18 },
+        { label: 'GUJARATI (GU-IN)', color: '#827d73', yRatio: 0.80, freq: 0.025, amp: 16 }
+      ];
+
+      tracks.forEach((tr, tIdx) => {
+        const centerY = vh * tr.yRatio;
+
+        // Label
+        vctx.fillStyle = tr.color;
+        vctx.font = '9px "JetBrains Mono", monospace';
+        vctx.fillText(tr.label, 16, centerY - 14);
+
+        // Center guideline
+        vctx.strokeStyle = '#f0ebe1';
+        vctx.lineWidth = 0.8;
+        vctx.beginPath();
+        vctx.moveTo(16, centerY);
+        vctx.lineTo(vw - 16, centerY);
+        vctx.stroke();
+
+        // Audio waveform path
+        vctx.beginPath();
+        vctx.moveTo(16, centerY);
+        for (let x = 16; x < vw - 16; x += 4) {
+          const envelope = Math.sin((x / vw) * Math.PI); // Window envelope
+          const wave1 = Math.sin((x + vTime * 45 + tIdx * 30) * tr.freq);
+          const wave2 = Math.cos((x - vTime * 25) * (tr.freq * 2.1));
+          const y = centerY + (wave1 * 0.7 + wave2 * 0.3) * tr.amp * envelope;
+          vctx.lineTo(x, y);
+        }
+        vctx.strokeStyle = tr.color;
+        vctx.lineWidth = 1.4;
+        vctx.stroke();
+      });
+
+      // Frequency spectrogram vertical spikes at bottom
+      vctx.fillStyle = 'rgba(77, 17, 28, 0.05)';
+      vctx.fillRect(0, vh - 24, vw, 24);
+
+      requestAnimationFrame(renderVoice);
+    }
+    requestAnimationFrame(renderVoice);
+  }
+
+  // Hero Canvas for Dedicated Infrastructure Page
+  const inspectionHeroCanvas = document.getElementById('inspectionHeroCanvas');
+  if (inspectionHeroCanvas) {
+    const ihctx = inspectionHeroCanvas.getContext('2d');
+    let ihw = 0, ihh = 0;
+    function resizeHeroInspection() {
+      const rect = inspectionHeroCanvas.parentElement.getBoundingClientRect();
+      ihw = rect.width;
+      ihh = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      inspectionHeroCanvas.width = Math.floor(ihw * dpr);
+      inspectionHeroCanvas.height = Math.floor(ihh * dpr);
+      ihctx.scale(dpr, dpr);
+    }
+    resizeHeroInspection();
+    window.addEventListener('resize', resizeHeroInspection);
+
+    let hTime = 0;
+    function renderHeroInspection() {
+      ihctx.clearRect(0, 0, ihw, ihh);
+      hTime += 0.018;
+
+      // Highway perspective corridor lines
+      ihctx.strokeStyle = '#ded7cb';
+      ihctx.lineWidth = 1;
+      const centerX = ihw * 0.5;
+      const horizonY = ihh * 0.22;
+
+      // Vanishing point lines
+      [-0.45, -0.28, -0.1, 0.1, 0.28, 0.45].forEach(ratio => {
+        ihctx.beginPath();
+        ihctx.moveTo(centerX, horizonY);
+        ihctx.lineTo(centerX + ihw * ratio, ihh);
+        ihctx.stroke();
+      });
+
+      // Transverse road markings moving down
+      const stepDist = 32;
+      const scroll = (hTime * 35) % stepDist;
+      for (let y = horizonY + scroll; y < ihh; y += stepDist) {
+        const spread = (y - horizonY) / (ihh - horizonY);
+        ihctx.beginPath();
+        ihctx.moveTo(centerX - ihw * 0.45 * spread, y);
+        ihctx.lineTo(centerX + ihw * 0.45 * spread, y);
+        ihctx.strokeStyle = `rgba(222, 215, 203, ${0.15 + spread * 0.8})`;
+        ihctx.stroke();
+      }
+
+      // Detection Box 1: Pothole with depth
+      const p1x = centerX - ihw * 0.22;
+      const p1y = ihh * 0.58;
+      ihctx.strokeStyle = '#ffb502';
+      ihctx.lineWidth = 1.5;
+      ihctx.strokeRect(p1x, p1y, 110, 50);
+      ihctx.fillStyle = '#ffb502';
+      ihctx.font = '10px "JetBrains Mono", monospace';
+      ihctx.fillText('POTHOLE [D: 18cm]', p1x, p1y - 8);
+      ihctx.fillText('SEVERITY: HIGH (IRC-SP-84)', p1x, p1y + 64);
+
+      // Detection Box 2: Alligator Cracking
+      const p2x = centerX + ihw * 0.12;
+      const p2y = ihh * 0.48;
+      ihctx.strokeStyle = '#4d111c';
+      ihctx.lineWidth = 1.5;
+      ihctx.strokeRect(p2x, p2y, 130, 60);
+      ihctx.fillStyle = '#4d111c';
+      ihctx.fillText('ALLIGATOR CRACK // 4.8m²', p2x, p2y - 8);
+      ihctx.fillText('STRUCTURAL QA: REVIEWS PASSED', p2x, p2y + 74);
+
+      // Overlay status telemetry
+      ihctx.fillStyle = '#272727';
+      ihctx.font = '11px "JetBrains Mono", monospace';
+      ihctx.fillText('SCAN RATE: 240 KM/DAY', 24, 30);
+      ihctx.fillText('CHAINAGE: KM 184+620', 24, 48);
+
+      ihctx.fillStyle = '#4d111c';
+      ihctx.fillText('ACCURACY: 99.2% AGREEMENT WITH CLIENT BENCHMARK', ihw - 380, 30);
+
+      requestAnimationFrame(renderHeroInspection);
+    }
+    requestAnimationFrame(renderHeroInspection);
+  }
+
+  // Hero Canvas for Dedicated Voice Page
+  const voiceHeroCanvas = document.getElementById('voiceHeroCanvas');
+  if (voiceHeroCanvas) {
+    const vhctx = voiceHeroCanvas.getContext('2d');
+    let vhw = 0, vhh = 0;
+    function resizeHeroVoice() {
+      const rect = voiceHeroCanvas.parentElement.getBoundingClientRect();
+      vhw = rect.width;
+      vhh = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      voiceHeroCanvas.width = Math.floor(vhw * dpr);
+      voiceHeroCanvas.height = Math.floor(vhh * dpr);
+      vhctx.scale(dpr, dpr);
+    }
+    resizeHeroVoice();
+    window.addEventListener('resize', resizeHeroVoice);
+
+    let vhTime = 0;
+    function renderHeroVoice() {
+      vhctx.clearRect(0, 0, vhw, vhh);
+      vhTime += 0.02;
+
+      // Frequency spectral bars
+      const numBars = 54;
+      const barWidth = (vhw - 48) / numBars;
+      for (let i = 0; i < numBars; i++) {
+        const h = Math.abs(Math.sin(vhTime * 2 + i * 0.28) * Math.cos(vhTime + i * 0.15)) * (vhh * 0.45) + 8;
+        const x = 24 + i * barWidth;
+        const y = vhh * 0.65 - h;
+        vhctx.fillStyle = i % 3 === 0 ? '#4d111c' : (i % 3 === 1 ? '#ffb502' : '#ded7cb');
+        vhctx.fillRect(x, y, barWidth - 2, h);
+      }
+
+      // Smooth envelope curve overlay
+      vhctx.beginPath();
+      vhctx.moveTo(24, vhh * 0.35);
+      for (let x = 24; x < vhw - 24; x += 6) {
+        const y = vhh * 0.32 + Math.sin((x + vhTime * 50) * 0.02) * 22 * Math.sin(x * 0.005);
+        vhctx.lineTo(x, y);
+      }
+      vhctx.strokeStyle = '#4d111c';
+      vhctx.lineWidth = 2;
+      vhctx.stroke();
+
+      // Audio transcription alignment badges
+      const markers = [
+        { x: vhw * 0.15, label: '[00:01.2] "नमस्ते, मैं कैसे मदद करूँ?"', lang: 'HINDI' },
+        { x: vhw * 0.48, label: '[00:03.8] "Confirm the payment gateway"', lang: 'INDIAN ENGLISH' },
+        { x: vhw * 0.78, label: '[00:06.4] "કાલે સવારે આવી જઈશ"', lang: 'KATHIYAWADI GUJARATI' }
+      ];
+
+      markers.forEach(m => {
+        vhctx.strokeStyle = '#ffb502';
+        vhctx.lineWidth = 1;
+        vhctx.setLineDash([4, 4]);
+        vhctx.beginPath();
+        vhctx.moveTo(m.x, vhh * 0.18);
+        vhctx.lineTo(m.x, vhh * 0.82);
+        vhctx.stroke();
+        vhctx.setLineDash([]);
+
+        vhctx.fillStyle = '#4d111c';
+        vhctx.font = '10px "JetBrains Mono", monospace';
+        vhctx.fillText(m.lang, m.x + 6, vhh * 0.22);
+        vhctx.fillStyle = '#272727';
+        vhctx.font = '11.5px "Inter", sans-serif';
+        vhctx.fillText(m.label, m.x + 6, vhh * 0.28);
+      });
+
+      // HUD Telemetry
+      vhctx.fillStyle = '#827d73';
+      vhctx.font = '10px "JetBrains Mono", monospace';
+      vhctx.fillText('SAMPLING: 48 KHZ / 24-BIT FLAC', 24, vhh - 16);
+      vhctx.fillText('DIALECT VARIATIONS: 14 REGIONAL ACCENTS MAPPED', vhw - 360, vhh - 16);
+
+      requestAnimationFrame(renderHeroVoice);
+    }
+    requestAnimationFrame(renderHeroVoice);
+  }
+
   // --------------------------------------------------------------------------
   // 6. STICKY HEADER & SCROLL REVEAL
   // --------------------------------------------------------------------------
