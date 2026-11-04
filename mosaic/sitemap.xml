@@ -24,8 +24,4 @@
     <loc>https://mosaiclabs-website.vercel.app/about</loc>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://mosaiclabs-website.vercel.app/insights</loc>
-    <priority>0.7</priority>
-  </url>
 </urlset>
