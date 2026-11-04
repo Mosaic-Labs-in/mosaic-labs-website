@@ -1527,6 +1527,33 @@ body.cursor-hover .custom-cursor-ring {
               border-color var(--duration-fast) var(--ease-out);
 }
 
+.card-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--burgundy);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.world-card-link:hover .card-explore-btn {
+  background: var(--accent-amber);
+  color: var(--burgundy);
+  box-shadow: 0 4px 14px rgba(255, 181, 2, 0.35);
+}
+
+.world-card-link:hover .card-explore-btn .arrow-icon {
+  transform: translateX(4px);
+  color: var(--burgundy);
+}
+
 .world-card-action .arrow-icon {
   color: var(--accent-amber);
   font-size: 15px;
