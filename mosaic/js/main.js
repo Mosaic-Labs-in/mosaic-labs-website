@@ -12,39 +12,42 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // --------------------------------------------------------------------------
-  // 1. MINIMAL CUSTOM CURSOR WITH PARTICLE REACTIVITY
+  // 1. MINIMAL CUSTOM CURSOR WITH PARTICLE REACTIVITY (DESKTOP ONLY)
   // --------------------------------------------------------------------------
-  const cursorDot = document.createElement('div');
-  const cursorRing = document.createElement('div');
-  cursorDot.className = 'custom-cursor-dot';
-  cursorRing.className = 'custom-cursor-ring';
-  document.body.appendChild(cursorDot);
-  document.body.appendChild(cursorRing);
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth < 880);
+  if (!isTouchDevice) {
+    const cursorDot = document.createElement('div');
+    const cursorRing = document.createElement('div');
+    cursorDot.className = 'custom-cursor-dot';
+    cursorRing.className = 'custom-cursor-ring';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
 
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-  });
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    }, { passive: true });
 
-  function updateCursor() {
-    ringX += (mouseX - ringX) * 0.22;
-    ringY += (mouseY - ringY) * 0.22;
-    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    function updateCursor() {
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      requestAnimationFrame(updateCursor);
+    }
     requestAnimationFrame(updateCursor);
-  }
-  requestAnimationFrame(updateCursor);
 
-  const interactives = document.querySelectorAll('a, button, input, select, textarea, .emitter-chip, .editorial-panel, .world-card, .journal-entry');
-  interactives.forEach((el) => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
+    const interactives = document.querySelectorAll('a, button, input, select, textarea, .emitter-chip, .editorial-panel, .world-card, .journal-entry');
+    interactives.forEach((el) => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
 
   // --------------------------------------------------------------------------
   // 2. THE LIVING DATA RIVER & MOSAIC LAYER ENGINE (#dataRiverCanvas)
@@ -214,28 +217,29 @@ document.addEventListener('DOMContentLoaded', () => {
       // -------------------------------------------------------------
       // 1. RENDER PHYSICAL EMITTER NODES (REAL WORLD - LEFT)
       // -------------------------------------------------------------
-      const leftX = 54;
+      const isMobile = cw < 550;
+      const leftX = isMobile ? 24 : 54;
       SOURCES.forEach((src, sIdx) => {
         const sy = ch * src.yRatio;
         const isSelected = activeSourceFilter === 'ALL' || activeSourceFilter === src.id;
 
         // Emitter pulse ring
         ctx.beginPath();
-        ctx.arc(leftX, sy, 12, 0, Math.PI * 2);
+        ctx.arc(leftX, sy, isMobile ? 8 : 12, 0, Math.PI * 2);
         ctx.strokeStyle = isSelected ? 'rgba(77, 17, 28, 0.4)' : '#e5ded2';
         ctx.lineWidth = 1;
         ctx.stroke();
 
         // Emitter core dot
         ctx.beginPath();
-        ctx.arc(leftX, sy, 4.5, 0, Math.PI * 2);
+        ctx.arc(leftX, sy, isMobile ? 3.5 : 4.5, 0, Math.PI * 2);
         ctx.fillStyle = isSelected ? '#4d111c' : '#272727';
         ctx.fill();
 
         // Label
-        ctx.font = '600 10.5px "Inter", sans-serif';
+        ctx.font = isMobile ? '600 8.5px "Inter", sans-serif' : '600 10.5px "Inter", sans-serif';
         ctx.fillStyle = isSelected ? '#4d111c' : '#827d73';
-        ctx.fillText(src.id, leftX + 20, sy + 3.5);
+        ctx.fillText(src.id, leftX + (isMobile ? 12 : 20), sy + 3);
       });
 
       // -------------------------------------------------------------
@@ -243,8 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // -------------------------------------------------------------
       const mosaicCx = cw * 0.50;
       const mosaicCy = ch * 0.48;
-      const mosaicW = Math.min(cw * 0.28, 220);
-      const mosaicH = 220;
+      const mosaicW = isMobile ? Math.min(cw * 0.40, 130) : Math.min(cw * 0.28, 220);
+      const mosaicH = isMobile ? 130 : 220;
 
       // Outer Layer Bounds & Hairline Frame
       ctx.fillStyle = '#ffffff';
@@ -255,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.strokeRect(mosaicCx - mosaicW / 2, mosaicCy - mosaicH / 2, mosaicW, mosaicH);
 
       // Corner Cross Marks (+)
-      ctx.font = '11px "JetBrains Mono", monospace';
+      ctx.font = isMobile ? '9px "JetBrains Mono", monospace' : '11px "JetBrains Mono", monospace';
       ctx.fillStyle = '#ffb502';
       ctx.fillText('+', mosaicCx - mosaicW / 2 - 4, mosaicCy - mosaicH / 2 + 4);
       ctx.fillText('+', mosaicCx + mosaicW / 2 - 4, mosaicCy - mosaicH / 2 + 4);
@@ -265,41 +269,56 @@ document.addEventListener('DOMContentLoaded', () => {
       // Central Geometric Facets (Mosaic Tiles)
       const tileCols = 3;
       const tileRows = 3;
-      const tw = (mosaicW - 24) / tileCols;
-      const th = (mosaicH - 24) / tileRows;
+      const tPad = isMobile ? 8 : 12;
+      const tw = (mosaicW - tPad * 2) / tileCols;
+      const th = (mosaicH - tPad * 2) / tileRows;
 
       for (let r = 0; r < tileRows; r++) {
         for (let c = 0; c < tileCols; c++) {
-          const tx = (mosaicCx - mosaicW / 2 + 12) + c * tw;
-          const ty = (mosaicCy - mosaicH / 2 + 12) + r * th;
+          const tx = (mosaicCx - mosaicW / 2 + tPad) + c * tw;
+          const ty = (mosaicCy - mosaicH / 2 + tPad) + r * th;
 
           ctx.strokeStyle = '#e5ded2';
           ctx.lineWidth = 0.8;
-          ctx.strokeRect(tx + 2, ty + 2, tw - 4, th - 4);
+          ctx.strokeRect(tx + 1.5, ty + 1.5, tw - 3, th - 3);
 
           // Internal activity dot
           ctx.beginPath();
-          ctx.arc(tx + tw / 2, ty + th / 2, 2, 0, Math.PI * 2);
+          ctx.arc(tx + tw / 2, ty + th / 2, isMobile ? 1.5 : 2, 0, Math.PI * 2);
           ctx.fillStyle = (r + c) % 2 === 0 ? '#ffb502' : '#4d111c';
           ctx.fill();
         }
       }
 
       // Title over Mosaic Layer
-      ctx.font = '600 10.5px "Inter", sans-serif';
+      ctx.font = isMobile ? '600 8.5px "Inter", sans-serif' : '600 10.5px "Inter", sans-serif';
       ctx.fillStyle = '#4d111c';
-      ctx.fillText('MOSAIC DATA LAYER', mosaicCx - 58, mosaicCy - mosaicH / 2 - 8);
+      const titleText = isMobile ? 'MOSAIC LAYER' : 'MOSAIC DATA LAYER';
+      const titleWidth = ctx.measureText(titleText).width;
+      ctx.fillText(titleText, mosaicCx - titleWidth / 2, mosaicCy - mosaicH / 2 - 6);
 
       // Subtitle status
-      ctx.font = '500 9px "Inter", sans-serif';
-      ctx.fillStyle = '#272727';
-      ctx.fillText('PROCESSING & ANNOTATION // AI-READY QUALITY', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
+      if (!isMobile) {
+        ctx.font = '500 9px "Inter", sans-serif';
+        ctx.fillStyle = '#272727';
+        ctx.fillText('PROCESSING & ANNOTATION // AI-READY QUALITY', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
+      } else {
+        ctx.font = '500 7.5px "Inter", sans-serif';
+        ctx.fillStyle = '#272727';
+        const sub = 'AI-READY DATASET';
+        const sw = ctx.measureText(sub).width;
+        ctx.fillText(sub, mosaicCx - sw / 2, mosaicCy + mosaicH / 2 + 12);
+      }
 
       // -------------------------------------------------------------
       // 3. RENDER INTELLIGENCE & DECISIONS (RIGHT)
       // -------------------------------------------------------------
-      const rightX = cw - 64;
-      const DECISIONS = [
+      const rightX = isMobile ? cw - 24 : cw - 64;
+      const DECISIONS = isMobile ? [
+        { label: 'AI DATASET', yRatio: 0.32 },
+        { label: 'PROVENANCE', yRatio: 0.50 },
+        { label: 'LIVE FEED',  yRatio: 0.68 }
+      ] : [
         { label: 'STRUCTURED_AI_DATASET', yRatio: 0.32 },
         { label: 'PROVENANCE_REPORT',      yRatio: 0.50 },
         { label: 'ONGOING_DATA_FEED',     yRatio: 0.68 }
@@ -310,18 +329,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Output Node
         ctx.beginPath();
-        ctx.arc(rightX, dy, 5, 0, Math.PI * 2);
+        ctx.arc(rightX, dy, isMobile ? 3.5 : 5, 0, Math.PI * 2);
         ctx.fillStyle = '#ffb502';
         ctx.fill();
 
         ctx.beginPath();
-        ctx.arc(rightX, dy, 12, 0, Math.PI * 2);
+        ctx.arc(rightX, dy, isMobile ? 8 : 12, 0, Math.PI * 2);
         ctx.strokeStyle = 'rgba(77, 17, 28, 0.4)';
         ctx.stroke();
 
-        ctx.font = '600 9px "Inter", sans-serif';
+        ctx.font = isMobile ? '600 7.5px "Inter", sans-serif' : '600 9px "Inter", sans-serif';
         ctx.fillStyle = '#272727';
-        ctx.fillText(dec.label, rightX - 146, dy - 8);
+        const tw = ctx.measureText(dec.label).width;
+        ctx.fillText(dec.label, rightX - tw - (isMobile ? 10 : 16), dy - 6);
       });
 
       // -------------------------------------------------------------
@@ -980,34 +1000,44 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Detection Box 1: Pothole with depth
-      const p1x = centerX - ihw * 0.22;
+      const isMobile = ihw < 550;
+      const b1w = isMobile ? 95 : 110;
+      const b2w = isMobile ? 110 : 130;
+      const p1x = isMobile ? Math.max(16, centerX - ihw * 0.38) : (centerX - ihw * 0.22);
       const p1y = ihh * 0.58;
       ihctx.strokeStyle = '#ffb502';
       ihctx.lineWidth = 1.5;
-      ihctx.strokeRect(p1x, p1y, 110, 50);
+      ihctx.strokeRect(p1x, p1y, b1w, 45);
       ihctx.fillStyle = '#ffb502';
-      ihctx.font = '10px "JetBrains Mono", monospace';
-      ihctx.fillText('POTHOLE [D: 18cm]', p1x, p1y - 8);
-      ihctx.fillText('SEVERITY: HIGH (IRC-SP-84)', p1x, p1y + 64);
+      ihctx.font = isMobile ? '9px "JetBrains Mono", monospace' : '10px "JetBrains Mono", monospace';
+      ihctx.fillText('POTHOLE [D: 18cm]', p1x, p1y - 6);
+      ihctx.fillText(isMobile ? 'IRC: HIGH' : 'SEVERITY: HIGH (IRC-SP-84)', p1x, p1y + 58);
 
       // Detection Box 2: Alligator Cracking
-      const p2x = centerX + ihw * 0.12;
-      const p2y = ihh * 0.48;
+      const p2x = isMobile ? Math.min(ihw - b2w - 16, centerX + ihw * 0.06) : (centerX + ihw * 0.12);
+      const p2y = ihh * 0.44;
       ihctx.strokeStyle = '#4d111c';
       ihctx.lineWidth = 1.5;
-      ihctx.strokeRect(p2x, p2y, 130, 60);
+      ihctx.strokeRect(p2x, p2y, b2w, 55);
       ihctx.fillStyle = '#4d111c';
-      ihctx.fillText('ALLIGATOR CRACK // 4.8m²', p2x, p2y - 8);
-      ihctx.fillText('STRUCTURAL QA: REVIEWS PASSED', p2x, p2y + 74);
+      ihctx.fillText(isMobile ? 'ALLIGATOR CRACK' : 'ALLIGATOR CRACK // 4.8m²', p2x, p2y - 6);
+      ihctx.fillText(isMobile ? 'QA: PASSED' : 'STRUCTURAL QA: REVIEWS PASSED', p2x, p2y + 68);
 
       // Overlay status telemetry
-      ihctx.fillStyle = '#272727';
-      ihctx.font = '11px "JetBrains Mono", monospace';
-      ihctx.fillText('SCAN RATE: 240 KM/DAY', 24, 30);
-      ihctx.fillText('CHAINAGE: KM 184+620', 24, 48);
-
-      ihctx.fillStyle = '#4d111c';
-      ihctx.fillText('ACCURACY: 99.2% AGREEMENT WITH CLIENT BENCHMARK', ihw - 380, 30);
+      ihctx.font = isMobile ? '9px "JetBrains Mono", monospace' : '11px "JetBrains Mono", monospace';
+      if (isMobile) {
+        ihctx.fillStyle = '#272727';
+        ihctx.fillText('SCAN: 240 KM/D', 16, 22);
+        ihctx.fillText('KM 184+620', 16, 36);
+        ihctx.fillStyle = '#4d111c';
+        ihctx.fillText('ACC: 99.2%', ihw - 85, 22);
+      } else {
+        ihctx.fillStyle = '#272727';
+        ihctx.fillText('SCAN RATE: 240 KM/DAY', 24, 30);
+        ihctx.fillText('CHAINAGE: KM 184+620', 24, 48);
+        ihctx.fillStyle = '#4d111c';
+        ihctx.fillText('ACCURACY: 99.2% AGREEMENT WITH CLIENT BENCHMARK', ihw - 380, 30);
+      }
 
       requestAnimationFrame(renderHeroInspection);
     }
@@ -1036,22 +1066,24 @@ document.addEventListener('DOMContentLoaded', () => {
       vhctx.clearRect(0, 0, vhw, vhh);
       vhTime += 0.02;
 
+      const isMobile = vhw < 550;
       // Frequency spectral bars
-      const numBars = 54;
-      const barWidth = (vhw - 48) / numBars;
+      const numBars = isMobile ? 32 : 54;
+      const barPadding = isMobile ? 16 : 24;
+      const barWidth = (vhw - barPadding * 2) / numBars;
       for (let i = 0; i < numBars; i++) {
         const h = Math.abs(Math.sin(vhTime * 2 + i * 0.28) * Math.cos(vhTime + i * 0.15)) * (vhh * 0.45) + 8;
-        const x = 24 + i * barWidth;
+        const x = barPadding + i * barWidth;
         const y = vhh * 0.65 - h;
         vhctx.fillStyle = i % 3 === 0 ? '#4d111c' : (i % 3 === 1 ? '#ffb502' : '#ded7cb');
-        vhctx.fillRect(x, y, barWidth - 2, h);
+        vhctx.fillRect(x, y, Math.max(1, barWidth - 2), h);
       }
 
       // Smooth envelope curve overlay
       vhctx.beginPath();
-      vhctx.moveTo(24, vhh * 0.35);
-      for (let x = 24; x < vhw - 24; x += 6) {
-        const y = vhh * 0.32 + Math.sin((x + vhTime * 50) * 0.02) * 22 * Math.sin(x * 0.005);
+      vhctx.moveTo(barPadding, vhh * 0.35);
+      for (let x = barPadding; x < vhw - barPadding; x += 6) {
+        const y = vhh * 0.32 + Math.sin((x + vhTime * 50) * 0.02) * 20 * Math.sin(x * 0.005);
         vhctx.lineTo(x, y);
       }
       vhctx.strokeStyle = '#4d111c';
@@ -1060,34 +1092,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Audio transcription alignment badges
       const markers = [
-        { x: vhw * 0.15, label: '[00:01.2] "नमस्ते, मैं कैसे मदद करूँ?"', lang: 'HINDI' },
-        { x: vhw * 0.48, label: '[00:03.8] "Confirm the payment gateway"', lang: 'INDIAN ENGLISH' },
-        { x: vhw * 0.78, label: '[00:06.4] "કાલે સવારે આવી જઈશ"', lang: 'KATHIYAWADI GUJARATI' }
+        { label: '[00:01.2] "नमस्ते, मैं कैसे मदद करूँ?"', lang: 'HINDI' },
+        { label: '[00:03.8] "Confirm the payment gateway"', lang: 'INDIAN ENGLISH' },
+        { label: '[00:06.4] "કાલે સવારે આવી જઈશ"', lang: 'KATHIYAWADI GUJARATI' }
       ];
 
-      markers.forEach(m => {
+      if (isMobile) {
+        // Cycle 1 marker smoothly on mobile so it never collides
+        const activeIdx = Math.floor((vhTime * 0.4) % markers.length);
+        const m = markers[activeIdx];
+        const mx = vhw * 0.5;
+
         vhctx.strokeStyle = '#ffb502';
         vhctx.lineWidth = 1;
-        vhctx.setLineDash([4, 4]);
+        vhctx.setLineDash([3, 3]);
         vhctx.beginPath();
-        vhctx.moveTo(m.x, vhh * 0.18);
-        vhctx.lineTo(m.x, vhh * 0.82);
+        vhctx.moveTo(mx, vhh * 0.16);
+        vhctx.lineTo(mx, vhh * 0.78);
         vhctx.stroke();
         vhctx.setLineDash([]);
 
         vhctx.fillStyle = '#4d111c';
-        vhctx.font = '10px "JetBrains Mono", monospace';
-        vhctx.fillText(m.lang, m.x + 6, vhh * 0.22);
+        vhctx.font = '600 9.5px "JetBrains Mono", monospace';
+        vhctx.textAlign = 'center';
+        vhctx.fillText(m.lang, mx, vhh * 0.18);
         vhctx.fillStyle = '#272727';
-        vhctx.font = '11.5px "Inter", sans-serif';
-        vhctx.fillText(m.label, m.x + 6, vhh * 0.28);
-      });
+        vhctx.font = '500 11px "Inter", sans-serif';
+        vhctx.fillText(m.label, mx, vhh * 0.26);
+        vhctx.textAlign = 'left';
 
-      // HUD Telemetry
-      vhctx.fillStyle = '#827d73';
-      vhctx.font = '10px "JetBrains Mono", monospace';
-      vhctx.fillText('SAMPLING: 48 KHZ / 24-BIT FLAC', 24, vhh - 16);
-      vhctx.fillText('DIALECT VARIATIONS: 14 REGIONAL ACCENTS MAPPED', vhw - 360, vhh - 16);
+        // Mobile Telemetry
+        vhctx.fillStyle = '#827d73';
+        vhctx.font = '9px "JetBrains Mono", monospace';
+        vhctx.fillText('48 KHZ / 24-BIT FLAC', 16, vhh - 24);
+        vhctx.fillText('14 REGIONAL ACCENTS', 16, vhh - 10);
+      } else {
+        const markerPositions = [0.15, 0.48, 0.78];
+        markers.forEach((m, idx) => {
+          const mx = vhw * markerPositions[idx];
+          vhctx.strokeStyle = '#ffb502';
+          vhctx.lineWidth = 1;
+          vhctx.setLineDash([4, 4]);
+          vhctx.beginPath();
+          vhctx.moveTo(mx, vhh * 0.18);
+          vhctx.lineTo(mx, vhh * 0.82);
+          vhctx.stroke();
+          vhctx.setLineDash([]);
+
+          vhctx.fillStyle = '#4d111c';
+          vhctx.font = '10px "JetBrains Mono", monospace';
+          vhctx.fillText(m.lang, mx + 6, vhh * 0.22);
+          vhctx.fillStyle = '#272727';
+          vhctx.font = '11.5px "Inter", sans-serif';
+          vhctx.fillText(m.label, mx + 6, vhh * 0.28);
+        });
+
+        // Desktop HUD Telemetry
+        vhctx.fillStyle = '#827d73';
+        vhctx.font = '10px "JetBrains Mono", monospace';
+        vhctx.fillText('SAMPLING: 48 KHZ / 24-BIT FLAC', 24, vhh - 16);
+        vhctx.fillText('DIALECT VARIATIONS: 14 REGIONAL ACCENTS MAPPED', vhw - 360, vhh - 16);
+      }
 
       requestAnimationFrame(renderHeroVoice);
     }
@@ -1170,7 +1235,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --------------------------------------------------------------------------
+  // 8. MOBILE NAVIGATION DRAWER
+  // --------------------------------------------------------------------------
+  const mobileToggle = document.getElementById('mobileNavToggle');
+  const mobileDrawer = document.getElementById('mobileNavMenu');
+  const mobileOverlay = document.getElementById('mobileNavOverlay');
+  const mobileClose = document.getElementById('mobileNavClose');
+
+  function openMobileNav() {
+    if (!mobileDrawer || !mobileOverlay) return;
+    mobileDrawer.classList.add('open');
+    mobileOverlay.classList.add('open');
+    if (mobileToggle) {
+      mobileToggle.classList.add('open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+    }
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNav() {
+    if (!mobileDrawer || !mobileOverlay) return;
+    mobileDrawer.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    if (mobileToggle) {
+      mobileToggle.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    }
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
+
+  if (mobileClose) mobileClose.addEventListener('click', closeMobileNav);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileNav);
+
+  // Close drawer on link click
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileNav();
+    });
+  });
+
+  const mobileNavCta = document.querySelectorAll('.mobile-nav-cta-btn');
+  mobileNavCta.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeMobileNav();
+      setTimeout(openM, 200);
+    });
+  });
+
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeM();
+    if (e.key === 'Escape') {
+      closeM();
+      closeMobileNav();
+    }
   });
 });
