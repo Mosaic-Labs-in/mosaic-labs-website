@@ -33,7 +33,7 @@ const BARRIERS = [
 export default function AboutPage() {
   return (
     <>
-      <section className="section hero-section" style={{ minHeight: "65vh", paddingTop: 160 }}>
+      <section className="section hero-section subpage-hero">
         <div className="container">
           <div className="section-eyebrow" data-reveal>
             About Mosaic Labs

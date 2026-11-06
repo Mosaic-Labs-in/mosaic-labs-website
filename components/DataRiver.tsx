@@ -48,7 +48,7 @@ const SOURCES = [
 const DECISIONS = [
   { label: "STRUCTURED_AI_DATASET", short: "AI DATASET", yRatio: 0.32 },
   { label: "PROVENANCE_REPORT", short: "PROVENANCE", yRatio: 0.5 },
-  { label: "ONGOING_DATA_FEED", short: "DATA FEED", yRatio: 0.68 },
+  { label: "ONGOING_DATA_FEED", short: "LIVE FEED", yRatio: 0.68 },
 ];
 
 const CHIPS = [

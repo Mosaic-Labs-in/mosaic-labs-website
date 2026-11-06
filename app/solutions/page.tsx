@@ -60,7 +60,7 @@ function Sector({
 export default function SolutionsPage() {
   return (
     <>
-      <section className="section hero-section" style={{ minHeight: "52vh", paddingTop: 140 }}>
+      <section className="section hero-section subpage-hero">
         <div className="container">
           <div className="section-eyebrow" data-reveal>
             Enterprise Domains

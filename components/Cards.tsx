@@ -21,25 +21,50 @@ export function WorldCard({
   title,
   metrics,
   canvas,
+  href,
+  ariaLabel,
+  explore,
   children,
 }: {
   eyebrow: string;
   title: string;
   metrics: Metric[];
   canvas?: ReactNode;
+  /** When set, the whole card becomes a link to the domain page. */
+  href?: string;
+  ariaLabel?: string;
+  /** Shows the "Explore More →" action row used by linked domain cards. */
+  explore?: boolean;
   children: ReactNode;
 }) {
-  return (
-    <div className="world-card">
+  const inner = (
+    <>
       {canvas && <div className="world-canvas-container">{canvas}</div>}
       <div className="world-card-content">
         <div className="world-eyebrow">{eyebrow}</div>
         <h3 className="world-title">{title}</h3>
         <p className="world-desc">{children}</p>
         <WorldMetrics metrics={metrics} />
+        {explore && (
+          <div className="world-card-action">
+            <span className="card-explore-btn">
+              Explore More <span className="arrow-icon">→</span>
+            </span>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="world-card world-card-link" aria-label={ariaLabel}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className="world-card">{inner}</div>;
 }
 
 export function JournalEntry({
@@ -82,18 +107,15 @@ const AI_DOMAIN = (
     We work with AI companies across industries to build the data infrastructure behind their intelligence. From
     sourcing and structuring data to creating high-quality, purpose-built datasets, we help turn real-world
     information into data that AI can learn from.
-    <br />
-    <br />
-    Whether you&apos;re building AI for healthcare, mobility, finance, retail, robotics, or something entirely new,
-    we help you build the data your models need to perform in the real world.
   </>
 );
 
-export function AiDomainCard({ eyebrow }: { eyebrow: string }) {
+export function AiDomainCard({ eyebrow, canvas }: { eyebrow: string; canvas?: ReactNode }) {
   return (
     <WorldCard
       eyebrow={eyebrow}
       title="Artificial Intelligence"
+      canvas={canvas}
       metrics={[
         ["MODEL TRAINING", "Purpose-built datasets"],
         ["CROSS-INDUSTRY", "Healthcare to Robotics"],

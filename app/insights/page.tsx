@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function InsightsPage() {
   return (
     <>
-      <section className="section hero-section" style={{ minHeight: "52vh", paddingTop: 140 }}>
+      <section className="section hero-section subpage-hero">
         <div className="container">
           <div className="section-eyebrow" data-reveal>
             Research &amp; Publications

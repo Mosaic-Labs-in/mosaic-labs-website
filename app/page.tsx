@@ -1,7 +1,14 @@
-import { AiDomainCard, JournalEntry, WorldCard } from "@/components/Cards";
+import { AiDomainCard, WorldCard } from "@/components/Cards";
 import { DataRiver } from "@/components/DataRiver";
 import { Intro } from "@/components/Intro";
-import { EnergyCanvas, InfraCanvas, MiniViz } from "@/components/MiniCanvases";
+import {
+  AiNetworkCanvas,
+  EnergyCanvas,
+  InfraCanvas,
+  InspectionCanvas,
+  MiniViz,
+  VoiceCanvas,
+} from "@/components/MiniCanvases";
 import { PipelineLoop } from "@/components/PipelineLoop";
 import { ArchCrosses, WorkBanner } from "@/components/WorkBanner";
 
@@ -17,6 +24,7 @@ const CAPABILITIES = [
       "Capture: Drones, cameras, dashcams, and mobile sensory kits",
       "Partner: Bilateral data structuring with utilities and enterprises",
     ],
+    explore: "Explore Acquisition Models",
   },
   {
     viz: "intelligence",
@@ -29,6 +37,7 @@ const CAPABILITIES = [
       "High-precision domain annotation and semantic tagging",
       "Pre-delivery quality assurance benchmarks and schema validation",
     ],
+    explore: "Explore Structuring Pipelines",
   },
   {
     viz: "real",
@@ -41,6 +50,7 @@ const CAPABILITIES = [
       "Ongoing subscription feeds that refresh as reality changes",
       "Applied AI models tuned directly to your operating environment",
     ],
+    explore: "Explore Delivery Options",
   },
 ] as const;
 
@@ -119,6 +129,10 @@ export default function HomePage() {
                     ))}
                   </ul>
                 </div>
+                <div className="panel-footer">
+                  <span>{c.explore}</span>
+                  <span className="panel-arrow">→</span>
+                </div>
               </div>
             ))}
           </div>
@@ -140,7 +154,40 @@ export default function HomePage() {
 
           <div className="solutions-world-grid" data-reveal>
             <WorldCard
+              href="/voice-data"
+              ariaLabel="Explore Voice & Speech Data Domain"
               eyebrow="Domain 01"
+              title="Voice & Speech Data"
+              canvas={<VoiceCanvas className="world-canvas" />}
+              metrics={[
+                ["INDIC SPEECH", "Hindi, English & Gujarati"],
+                ["CODE-SWITCHING", "Acoustic QA & verified text"],
+              ]}
+              explore
+            >
+              Natural speech data collection across Hindi, Indian English, and Gujarati dialects. Sourcing
+              conversational speech, regional accents, and natural code-switching paired with verified transcripts for
+              AI.
+            </WorldCard>
+
+            <WorldCard
+              href="/infrastructure-data"
+              ariaLabel="Explore Infrastructure & Inspection Data Domain"
+              eyebrow="Domain 02"
+              title="Infrastructure & Inspection Data"
+              canvas={<InspectionCanvas className="world-canvas" />}
+              metrics={[
+                ["DEFECT LABELS", "Potholes, cracks & spalling"],
+                ["SURVEY QA", "Highway, bridge & dam imagery"],
+              ]}
+              explore
+            >
+              High-throughput processing labor and defect quality control for road surface scans, bridge and dam drone
+              imagery, and highway dashcam feeds mapped against Indian Roads Congress (IRC) standards.
+            </WorldCard>
+
+            <WorldCard
+              eyebrow="Domain 03"
               title="Energy & Utilities"
               canvas={<EnergyCanvas className="world-canvas" />}
               metrics={[
@@ -153,7 +200,7 @@ export default function HomePage() {
             </WorldCard>
 
             <WorldCard
-              eyebrow="Domain 02"
+              eyebrow="Domain 04"
               title="Roads & Transportation"
               canvas={<InfraCanvas className="world-canvas" />}
               metrics={[
@@ -165,7 +212,7 @@ export default function HomePage() {
               transport corridor datasets with automated privacy redaction.
             </WorldCard>
 
-            <AiDomainCard eyebrow="Domain 03" />
+            <AiDomainCard eyebrow="Domain 05" canvas={<AiNetworkCanvas className="world-canvas" />} />
           </div>
         </div>
       </section>
@@ -205,77 +252,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Insights */}
-      <section className="section" id="insights">
-        <ArchCrosses />
-        <div className="container">
-          <div data-reveal>
-            <div className="section-eyebrow">Perspectives &amp; Research</div>
-            <h2 className="section-title">Field notes on real-world data infrastructure.</h2>
-            <p className="section-subtitle">
-              Insights on multi-modal acquisition, automated privacy redaction, and the shift from static datasets to
-              continuous Data as a Service.
-            </p>
-          </div>
-
-          <div className="insights-journal-list" data-reveal>
-            <JournalEntry
-              href="/insights"
-              date="2026.08"
-              category="STRATEGY"
-              title="The Real-World Data Bottleneck: Why AI Progress Depends on Physical Ground-Truth"
-            >
-              Foundation models have consumed the public internet. The next breakthrough in robotics, energy, and
-              infrastructure demands structured physical data that has never been indexed.
-            </JournalEntry>
-            <JournalEntry
-              href="/insights"
-              date="2026.06"
-              category="COMPLIANCE"
-              title="Privacy by Design in Real-World Computer Vision: Automated Redaction at Scale"
-            >
-              How automated PII redaction, facial blurring, and license plate masking enable high-performance vision
-              training while maintaining strict alignment with privacy regulations.
-            </JournalEntry>
-            <JournalEntry
-              href="/insights"
-              date="2026.04"
-              category="FOUNDATIONS"
-              title="Beyond One-Off Datasets: Why Enterprises Are Moving to Data as a Service"
-            >
-              Physical operating environments evolve continuously. Why static benchmark datasets degrade rapidly and how
-              subscription data feeds ensure model durability over time.
-            </JournalEntry>
-          </div>
-        </div>
-      </section>
-
-      {/* 6.5 Blogs */}
-      <section className="section" id="blogs">
-        <ArchCrosses />
-        <div className="container">
-          <div data-reveal>
-            <div className="section-eyebrow">Blogs</div>
-            <h2 className="section-title">Latest Updates &amp; Stories.</h2>
-            <p className="section-subtitle">
-              News, company updates, and deeper dives into our ongoing projects and team culture.
-            </p>
-          </div>
-
-          <div className="insights-journal-list" data-reveal>
-            <JournalEntry
-              href="#"
-              date="2026.09"
-              category="COMPANY"
-              title="Welcome to Mosaic Labs: Our Vision for the Future"
-            >
-              A look into why we started Mosaic Labs and our mission to structure the physical world for AI models.
-            </JournalEntry>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Work with us */}
+      {/* 6. Work with us */}
       <WorkBanner title="Turn your physical domain into AI-ready intelligence." sectionStyle={{ paddingBottom: 40 }} />
     </>
   );

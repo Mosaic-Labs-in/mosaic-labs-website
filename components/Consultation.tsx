@@ -8,7 +8,9 @@ const DOMAINS = [
   "Agriculture & Crop Analytics",
   "Energy & Utilities",
   "Roads & Transportation",
-  "Infrastructure & Built Environment",
+  "Infrastructure & Inspection Data",
+  "Voice & Speech Data (Indic AI)",
+  "Artificial Intelligence",
   "Disaster Response & Climate",
   "Manufacturing & Industrial",
   "Custom Physical Domain",
@@ -153,7 +155,7 @@ export function ConsultationProvider({ children }: { children: ReactNode }) {
           </div>
 
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 10.5, color: "var(--ink-muted)", marginTop: 32 }}>
-            Where Data finds Structure.
+            DATA AS A SERVICE // PRIVACY BY DESIGN // MOSAIC LABS
           </div>
         </div>
       </div>

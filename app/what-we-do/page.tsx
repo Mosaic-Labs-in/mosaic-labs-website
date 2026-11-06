@@ -50,7 +50,7 @@ const PANELS = [
 export default function WhatWeDoPage() {
   return (
     <>
-      <section className="section hero-section" style={{ minHeight: "52vh", paddingTop: 140 }}>
+      <section className="section hero-section subpage-hero">
         <div className="container">
           <div className="section-eyebrow" data-reveal>
             Core Capabilities

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Data Collection for AI: Hindi, English and Gujarati | Mosaic Labs</title>
+  <meta name="description" content="Speech datasets across Hindi, Indian English, and Gujarati—capturing regional accents, dialects, everyday conversations, and natural code-switching for speech AI.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='211 140 801 757'><path fill='%23ffb502' d='M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z'/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Architectural Grid Lines -->
+  <div class="arch-grid-lines" aria-hidden="true">
+    <div class="arch-grid-line-left"></div>
+    <div></div>
+    <div class="arch-grid-line-right"></div>
+  </div>
+
+  <!-- Persistent Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html#hero" class="brand-link" aria-label="Mosaic Labs Home">
+        <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+          <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+          <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+          <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+          <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+          <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+          <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+          <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+          <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+          <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+        </svg>
+        <span>MOSAIC LABS</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html#data-river" class="nav-item-link">Data Layer</a></li>
+          <li><a href="what-we-do.html" class="nav-item-link">What We Do</a></li>
+          <li><a href="solutions.html" class="nav-item-link active">Domains</a></li>
+          <li><a href="about.html" class="nav-item-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-cta">
+          <a href="mailto:mosaiclabs17@gmail.com" class="cta-pill cta-pill-solid header-cta-btn">
+            Contact <span class="arrow-icon">→</span>
+          </a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNavMenu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Overlay & Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
+  <nav class="mobile-nav-drawer" id="mobileNavMenu" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+          <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+          <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+          <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+          <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+          <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+          <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+          <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+          <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+          <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+        </svg>
+        <span>MOSAIC LABS</span>
+      </div>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">
+        <span>✕</span>
+      </button>
+    </div>
+
+    <div class="mobile-nav-body">
+      <div>
+        <div class="mobile-nav-section-label">Navigation</div>
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link"><span class="nav-idx">01</span><span>Home &amp; Data Pipeline</span></a></li>
+          <li><a href="what-we-do.html" class="mobile-nav-link"><span class="nav-idx">02</span><span>What We Do</span></a></li>
+          <li><a href="solutions.html" class="mobile-nav-link"><span class="nav-idx">03</span><span>Enterprise Domains</span></a></li>
+          <li><a href="voice-data.html" class="mobile-nav-link mobile-sub-link active"><span class="nav-bullet">↳</span><span>Voice &amp; Speech Data</span><span class="badge-tag">Domain 01</span></a></li>
+          <li><a href="infrastructure-data.html" class="mobile-nav-link mobile-sub-link"><span class="nav-bullet">↳</span><span>Infrastructure Data</span><span class="badge-tag">Domain 02</span></a></li>
+          <li><a href="about.html" class="mobile-nav-link"><span class="nav-idx">04</span><span>About &amp; Provenance</span></a></li>
+          <li><a href="insights.html" class="mobile-nav-link"><span class="nav-idx">05</span><span>Insights</span></a></li>
+        </ul>
+
+        <div class="mobile-nav-cta-wrapper">
+          <a href="mailto:mosaiclabs17@gmail.com" class="cta-pill cta-pill-solid mobile-nav-cta-btn" style="text-decoration: none; justify-content: center;">
+            Contact Mosaic Labs <span class="arrow-icon">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-footer">
+        <div class="mobile-contact-item">
+          <span class="contact-lbl">Contact:</span>
+          <a href="mailto:mosaiclabs17@gmail.com" class="contact-val">mosaiclabs17@gmail.com</a>
+        </div>
+        <div class="mobile-nav-status">
+          DATA AS A SERVICE // PRIVACY BY DESIGN // DPDP ALIGNED
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="appContainer">
+
+    <!-- ======================================================================
+         A. HERO
+         ====================================================================== -->
+    <section class="section hero-section" style="min-height: auto; padding-top: clamp(88px, 12vw, 120px); padding-bottom: 20px;">
+      <div class="container">
+        
+        <div class="domain-breadcrumb" data-reveal>
+          <a href="index.html#solutions">← Enterprise Domains</a>
+          <span class="crumb-sep">/</span>
+          <span>Domain 01: Voice & Speech Data</span>
+        </div>
+
+        <div class="section-eyebrow" data-reveal>Enterprise Domain 01 // Speech Datasets</div>
+        <h1 class="section-title" style="font-size: clamp(30px, 4.4vw, 52px); max-width: 960px;" data-reveal>
+          Voice Data Collection for AI: Hindi, English and Gujarati
+        </h1>
+        <p class="section-subtitle" style="max-width: 800px; font-size: 15.5px; line-height: 1.6;" data-reveal>
+          Building reliable speech technology requires speech data that reflects real-world communication across regional accents, dialects, and everyday conversational styles. Mosaic Labs sources, prepares, and structures high-quality voice datasets across Hindi, Indian English, and Gujarati—including regional dialects and spontaneous code-switching.
+        </p>
+
+        <!-- Technical Visual Hero Canvas -->
+        <div class="domain-hero-visual" style="margin: 28px 0 0 0;" data-reveal>
+          <div class="domain-canvas-viewport" style="height: clamp(200px, 26vw, 280px);">
+            <canvas id="voiceHeroCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
+          </div>
+          <div class="domain-visual-meta">
+            <div>
+              <span>LANGUAGES: <span class="meta-tag">HINDI · INDIAN ENGLISH · GUJARATI</span></span>
+              <span style="margin-left: 18px;">DIALECTS: <span class="meta-tag">KATHIYAWADI & NORTHERN VARIATIONS</span></span>
+            </div>
+            <div>
+              <span>FORMATS: AUDIO FILES · TIME-ALIGNED VERIFIED TRANSCRIPTS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         B. DOMAIN OVERVIEW
+         ====================================================================== -->
+    <section class="section" style="padding: 40px 0;">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div data-reveal style="margin-bottom: 24px;">
+          <div class="section-eyebrow">Domain Overview</div>
+          <h2 class="problem-statement" style="font-size: clamp(24px, 3.2vw, 36px); line-height: 1.25; max-width: 860px;">
+            Why Language and Dialect Diversity Matter
+          </h2>
+          <p class="problem-detail" style="font-size: 14.5px; line-height: 1.65; max-width: 820px;">
+            A speech model trained on textbook translations or standard accents frequently degrades when encountering regional pronunciation, conversational pacing, and mixed language usage. High-quality speech AI requires datasets built from how people actually communicate in real settings, supported by clear audio, verified transcriptions, and documented linguistic criteria.
+          </p>
+        </div>
+
+        <div class="domain-tri-grid" style="margin-top: 0; gap: 18px;" data-reveal>
+          <div class="domain-card-spec" style="padding: 24px 20px;">
+            <div class="domain-step-num">01 / DIALECTS</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 8px;">Authentic Dialect Coverage</h3>
+            <p class="domain-card-body" style="font-size: 13.5px; line-height: 1.55;">
+              Capturing regional linguistic variations—such as Kathiyawadi and Northern Gujarati—through reviewed speaker backgrounds rather than inferring dialect from geography alone.
+            </p>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 24px 20px;">
+            <div class="domain-step-num">02 / CODE-SWITCHING</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 8px;">Natural Language Mixing</h3>
+            <p class="domain-card-body" style="font-size: 13.5px; line-height: 1.55;">
+              Recording spontaneous transitions between Hindi-English and Gujarati-English to represent how multilingual speakers communicate in everyday conversation.
+            </p>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 24px 20px;">
+            <div class="domain-step-num">03 / GOVERNANCE</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 8px;">Consent & Data Governance</h3>
+            <p class="domain-card-body" style="font-size: 13.5px; line-height: 1.55;">
+              Ethical speaker recruitment with explicit informed consent, clear usage terms, secure data handling, and transparent collection documentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         C. WHAT WE DELIVER
+         ====================================================================== -->
+    <section class="section" style="padding: 40px 0;">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div data-reveal style="margin-bottom: 24px;">
+          <div class="section-eyebrow">Capabilities & Deliverables</div>
+          <h2 class="section-title" style="font-size: clamp(24px, 3.4vw, 40px); margin-bottom: 8px;">What We Deliver</h2>
+          <p class="section-subtitle" style="font-size: 14.5px; margin-bottom: 0;">
+            Targeted speech datasets structured to specific AI application requirements, audio formats, and transcription standards.
+          </p>
+        </div>
+
+        <!-- 3 Primary Language Cards -->
+        <div class="domain-tri-grid" style="margin-top: 0; gap: 18px;" data-reveal>
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <div class="domain-step-num">01 / HINDI</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 10px;">Hindi Speech Datasets</h3>
+            <ul class="panel-specs" style="font-size: 13px; line-height: 1.6;">
+              <li class="panel-spec-item">Natural conversational Hindi recordings</li>
+              <li class="panel-spec-item">Read speech and scripted prompt audio</li>
+              <li class="panel-spec-item">Everyday phrases and regional accent diversity</li>
+              <li class="panel-spec-item">Hindi-English spontaneous code-switching</li>
+              <li class="panel-spec-item">Paired with verified text transcriptions</li>
+            </ul>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <div class="domain-step-num">02 / ENGLISH</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 10px;">Indian English Speech</h3>
+            <ul class="panel-specs" style="font-size: 13px; line-height: 1.6;">
+              <li class="panel-spec-item">Indian English across fluency and accent levels</li>
+              <li class="panel-spec-item">Conversational and read English recordings</li>
+              <li class="panel-spec-item">Varying speaking speeds and pronunciation styles</li>
+              <li class="panel-spec-item">Hindi-English and Gujarati-English mixed speech</li>
+              <li class="panel-spec-item">Paired with verified text transcriptions</li>
+            </ul>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <div class="domain-step-num">03 / GUJARATI</div>
+            <h3 class="domain-card-title" style="font-size: 16px; margin-bottom: 10px;">Gujarati & Dialects</h3>
+            <ul class="panel-specs" style="font-size: 13px; line-height: 1.6;">
+              <li class="panel-spec-item">Standard and conversational Gujarati</li>
+              <li class="panel-spec-item">Kathiyawadi Gujarati regional variations</li>
+              <li class="panel-spec-item">Northern Gujarati dialectal speech</li>
+              <li class="panel-spec-item">Gujarati-English and Gujarati-Hindi code-switching</li>
+              <li class="panel-spec-item">Paired with verified text transcriptions</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Acquisition & Structuring Process -->
+        <div class="domain-step-box" style="margin-top: 20px; border-left: 3px solid var(--burgundy); padding: 20px 22px;" data-reveal>
+          <div class="domain-step-num" style="margin-bottom: 4px;">PROCESSING & STRUCTURING PIPELINE</div>
+          <h4 class="domain-step-title" style="font-size: 15.5px; margin-bottom: 6px;">From Recording to Verified Dataset</h4>
+          <p class="domain-step-desc" style="font-size: 13px; line-height: 1.6; margin-bottom: 0;">
+            Recordings undergo systematic audio quality checks for background noise, clipping, and incomplete speech. Processing includes segmentation, transcription, language identification, and dialect labeling. Deliverables include cleaned audio files, verified transcripts, speaker metadata, and documentation formatted to client specifications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         D. APPLICATIONS
+         ====================================================================== -->
+    <section class="section" style="padding: 40px 0;">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div data-reveal style="margin-bottom: 24px;">
+          <div class="section-eyebrow">Target Applications</div>
+          <h2 class="section-title" style="font-size: clamp(24px, 3.4vw, 40px); margin-bottom: 8px;">Applications & Use Cases</h2>
+          <p class="section-subtitle" style="font-size: 14.5px; margin-bottom: 0;">
+            Speech technology teams and systems supported by our Hindi, English, and Gujarati datasets.
+          </p>
+        </div>
+
+        <div class="domain-quad-grid" style="margin-top: 0; gap: 18px;" data-reveal>
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <span class="domain-card-badge" style="margin-bottom: 10px;">ASR SYSTEMS</span>
+            <h3 class="domain-card-title" style="font-size: 15.5px; margin-bottom: 6px;">Speech Recognition (ASR)</h3>
+            <p class="domain-card-body" style="font-size: 13px; line-height: 1.55;">
+              Audio paired with verified text transcriptions to train and evaluate speech-to-text models across Indian languages and regional accents.
+            </p>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <span class="domain-card-badge" style="margin-bottom: 10px;">CONVERSATIONAL AI</span>
+            <h3 class="domain-card-title" style="font-size: 15.5px; margin-bottom: 6px;">Voice Assistants & Bots</h3>
+            <p class="domain-card-body" style="font-size: 13px; line-height: 1.55;">
+              Multilingual speech datasets capturing natural phrasing and conversational turns for voice agents handling complex Indian language queries.
+            </p>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <span class="domain-card-badge" style="margin-bottom: 10px;">FOUNDATION MODELS</span>
+            <h3 class="domain-card-title" style="font-size: 15.5px; margin-bottom: 6px;">Multilingual Speech Models</h3>
+            <p class="domain-card-body" style="font-size: 13px; line-height: 1.55;">
+              Spoken-language datasets for evaluating multilingual AI capabilities, speech tokenization, and language-specific performance benchmarks.
+            </p>
+          </div>
+
+          <div class="domain-card-spec" style="padding: 22px 20px;">
+            <span class="domain-card-badge" style="margin-bottom: 10px;">ENTERPRISE INTERFACES</span>
+            <h3 class="domain-card-title" style="font-size: 15.5px; margin-bottom: 6px;">Customer Support & Products</h3>
+            <p class="domain-card-body" style="font-size: 13px; line-height: 1.55;">
+              Licensed speech data reflecting authentic regional speech patterns for contact centers and voice-enabled consumer products.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         E. CLOSING (MINIMAL, NO FORMS)
+         ====================================================================== -->
+    <section class="section" style="padding: 36px 0 56px 0; border-bottom: none;">
+      <span class="arch-cross tl">+</span><span class="arch-cross tr">+</span>
+      <div class="container">
+        <div style="border-top: 1px solid var(--border-line); padding-top: 32px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;" data-reveal>
+          <div class="section-eyebrow" style="color: var(--burgundy); margin-bottom: 0;">Mosaic Labs // Voice & Speech Data</div>
+          <p style="font-size: 14.5px; color: var(--ink-secondary); max-width: 680px; margin-bottom: 4px;">
+            To discuss custom speech dataset collection, dialect coverage, or language data specifications, contact our team at <a href="mailto:mosaiclabs17@gmail.com" style="color: var(--burgundy); font-weight: 500; text-decoration: underline;">mosaiclabs17@gmail.com</a>.
+          </p>
+          <a href="index.html#solutions" class="panel-tag" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 11px;">
+            <span>← Return to Enterprise Domains</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="index.html#hero" class="brand-link">
+            <svg viewBox="211 140 801 757" class="brand-svg" aria-hidden="true">
+              <path d="M471 409 L 757 445.5 L 758 459.4 L 750.7 658.3 L 495.4 645.4 L 494.5 644.5 L 471 415.7 Z"/>
+              <path d="M776 657.2 L 783.4 450 L 1012 450 L 1012 660 L 776 660 Z"/>
+              <path d="M775 686 L 1012 686 L 1012 891 L 1011 892 L 794 892 L 792.8 891.4 L 774.1 686.9 Z"/>
+              <path d="M782 417.4 L 791.1 217 L 1012 217 L 1012 424 L 782 424 Z"/>
+              <path d="M518 377.6 L 529.2 217 L 766 217 L 756.9 421 L 755.1 421 L 518 381.9 Z"/>
+              <path d="M529 719 L 743 686.1 L 769.5 887.5 L 763 889 L 727.9 894.7 L 632.3 897 L 562 897 L 560.6 895.6 L 529 721.2 Z"/>
+              <path d="M211 587 L 211 584.7 L 231.3 390.7 L 408.4 398.7 L 426.7 592.3 Z"/>
+              <path d="M291 319.5 L 332.3 140 L 335 140 L 510 188.3 L 510 190.2 L 461.5 369 L 459.1 369 L 291 322.3 Z"/>
+              <path d="M339 897 L 318 897 L 317 896 L 360.4 711.6 L 458.7 687 L 463.3 687 L 503 862.9 L 503 866.6 L 342.2 896.7 Z"/>
+            </svg>
+            <span>MOSAIC LABS</span>
+          </a>
+          <p class="footer-tagline">
+            Turning fragmented real-world data into AI-ready datasets. Data as a Service, custom collection, and applied AI models.
+          </p>
+        </div>
+        <div>
+          <div class="footer-nav-title">Navigation</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="what-we-do.html" class="footer-link">What We Do</a></li>
+            <li class="footer-link-item"><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li class="footer-link-item"><a href="about.html" class="footer-link">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-nav-title">Contact & Inquiries</div>
+          <ul class="footer-links">
+            <li class="footer-link-item"><a href="mailto:mosaiclabs17@gmail.com" class="footer-link">mosaiclabs17@gmail.com</a></li>
+            <li class="footer-link-item"><span class="footer-link" style="color: var(--ink-muted);">Ahmedabad, Gujarat</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 MOSAIC LABS INC. ALL RIGHTS RESERVED.</div>
+        <div>VOICE DATA COLLECTION // HINDI · ENGLISH · GUJARATI // MOSAIC LABS</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
