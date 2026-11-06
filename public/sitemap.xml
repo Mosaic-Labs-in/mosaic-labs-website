@@ -13,11 +13,15 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mosaiclabs-website.vercel.app/about</loc>
-    <priority>0.7</priority>
+    <loc>https://mosaiclabs-website.vercel.app/infrastructure-data</loc>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mosaiclabs-website.vercel.app/insights</loc>
+    <loc>https://mosaiclabs-website.vercel.app/voice-data</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mosaiclabs-website.vercel.app/about</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
