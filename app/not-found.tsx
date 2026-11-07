@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="container" style={{ textAlign: "center", maxWidth: 820 }}>
         <div className="hero-tag" style={{ justifyContent: "center", marginBottom: 24 }}>
           <span className="status-indicator" style={{ background: "var(--amber-gold)" }}></span>
-          ERROR 404 // NODE NOT FOUND
+          404 · PAGE NOT FOUND
         </div>
         <h1 className="hero-display" style={{ fontSize: "clamp(34px, 5vw, 68px)", margin: "0 auto 24px", lineHeight: 1.15 }}>
           &quot;The requested coordinate does not exist in the data layer.&quot;

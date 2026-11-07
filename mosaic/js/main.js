@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isMobile) {
         ctx.font = '500 9px "Inter", sans-serif';
         ctx.fillStyle = '#272727';
-        ctx.fillText('PROCESSING & ANNOTATION // AI-READY QUALITY', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
+        ctx.fillText('PROCESSING & ANNOTATION · QUALITY VERIFIED', mosaicCx - 110, mosaicCy + mosaicH / 2 + 16);
       } else {
         ctx.font = '500 7.5px "Inter", sans-serif';
         ctx.fillStyle = '#272727';
@@ -876,7 +876,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sctx.fillStyle = '#827d73';
       sctx.font = '9px "JetBrains Mono", monospace';
       sctx.fillText('SURVEY: NHAI-CORRIDOR-04', 16, sh - 14);
-      sctx.fillText('IRC-SPALL // VERIFIED', sw - 140, sh - 14);
+      sctx.fillText('IRC-SPALL · VERIFIED', sw - 140, sh - 14);
 
       requestAnimationFrame(renderInspection);
     }
@@ -1020,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ihctx.lineWidth = 1.5;
       ihctx.strokeRect(p2x, p2y, b2w, 55);
       ihctx.fillStyle = '#4d111c';
-      ihctx.fillText(isMobile ? 'ALLIGATOR CRACK' : 'ALLIGATOR CRACK // 4.8m²', p2x, p2y - 6);
+      ihctx.fillText(isMobile ? 'ALLIGATOR CRACK' : 'ALLIGATOR CRACK · 4.8m²', p2x, p2y - 6);
       ihctx.fillText(isMobile ? 'QA: PASSED' : 'STRUCTURAL QA: REVIEWS PASSED', p2x, p2y + 68);
 
       // Overlay status telemetry

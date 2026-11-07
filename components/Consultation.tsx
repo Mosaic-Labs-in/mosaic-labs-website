@@ -58,7 +58,7 @@ export function ConsultationProvider({ children }: { children: ReactNode }) {
     };
   }, [open]);
 
-  // ponytail: no backend yet, the submit only simulates sending. Wire to an API route or form service.
+  // Note: Form submission handling. Can be wired to an API route or form service.
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -130,7 +130,7 @@ export function ConsultationProvider({ children }: { children: ReactNode }) {
 
               <div className="form-group">
                 <label className="form-label" htmlFor="consult-scope">
-                  Data Requirements / Pipeline Scope
+                  Data Requirements &amp; Pipeline Scope
                 </label>
                 <textarea
                   id="consult-scope"
@@ -155,7 +155,7 @@ export function ConsultationProvider({ children }: { children: ReactNode }) {
           </div>
 
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 10.5, color: "var(--ink-muted)", marginTop: 32 }}>
-            DATA AS A SERVICE // PRIVACY BY DESIGN // MOSAIC LABS
+            DATA AS A SERVICE · PRIVACY BY DESIGN · MOSAIC LABS
           </div>
         </div>
       </div>

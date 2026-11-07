@@ -116,7 +116,7 @@ export function Intro() {
   return (
     <div className={`entrance-overlay${done ? " hidden" : ""}`} ref={overlayRef} aria-hidden="true">
       <canvas id="entranceCanvas" ref={canvasRef}></canvas>
-      <div className="entrance-status">DATA AS A SERVICE // MOSAIC LABS</div>
+      <div className="entrance-status">DATA AS A SERVICE · MOSAIC LABS</div>
     </div>
   );
 }

@@ -219,7 +219,7 @@ export function InspectionCanvas({ className }: { className?: string }) {
       // Telemetry HUD tags
       ctx.fillStyle = "#827d73";
       ctx.fillText("SURVEY: NHAI-CORRIDOR-04", 16, h - 14);
-      ctx.fillText("IRC-SPALL // VERIFIED", w - 140, h - 14);
+      ctx.fillText("IRC-SPALL · VERIFIED", w - 140, h - 14);
     };
   });
 
@@ -433,7 +433,7 @@ export function InspectionHeroCanvas({ className }: { className?: string }) {
       ctx.lineWidth = 1.5;
       ctx.strokeRect(p2x, p2y, b2w, 55);
       ctx.fillStyle = "#4d111c";
-      ctx.fillText(isMobile ? "ALLIGATOR CRACK" : "ALLIGATOR CRACK // 4.8m²", p2x, p2y - 6);
+      ctx.fillText(isMobile ? "ALLIGATOR CRACK" : "ALLIGATOR CRACK · 4.8m²", p2x, p2y - 6);
       ctx.fillText(isMobile ? "QA: PASSED" : "STRUCTURAL QA: REVIEWS PASSED", p2x, p2y + 68);
 
       // Overlay status telemetry

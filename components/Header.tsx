@@ -35,7 +35,7 @@ type DrawerItem = { key: string | null; href: string; label: string; sub?: boole
 
 /**
  * Numbered drawer entries. Subpages link across the site (including Insights);
- * the homepage drawer scrolls its own sections and omits Insights — kept faithfully
+ * the homepage drawer scrolls its own sections and omits Insights - kept faithfully
  * from the domains-branch authoring.
  */
 function drawerItems(pathname: string): DrawerItem[] {
@@ -264,7 +264,7 @@ export function Header() {
                 {EMAIL}
               </a>
             </div>
-            <div className="mobile-nav-status">DATA AS A SERVICE // PRIVACY BY DESIGN // DPDP ALIGNED</div>
+            <div className="mobile-nav-status">DATA AS A SERVICE · PRIVACY BY DESIGN · DPDP ALIGNED</div>
           </div>
         </div>
       </nav>

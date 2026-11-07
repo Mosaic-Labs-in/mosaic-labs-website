@@ -2212,6 +2212,77 @@ body.cursor-hover .custom-cursor-ring {
   color: var(--ink-secondary);
 }
 
+/* Domain Info / Additional Notice Box */
+.domain-info-notice {
+  background: #faf8f5;
+  border: 1px solid var(--border-line);
+  border-left: 3px solid var(--accent-amber);
+  padding: 24px 26px;
+  position: relative;
+  margin-top: 18px;
+  transition: border-color 0.2s ease;
+}
+
+.notice-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notice-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notice-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+  display: inline-block;
+}
+
+.notice-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--burgundy);
+  text-transform: uppercase;
+}
+
+.notice-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.notice-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: 0;
+  max-width: 820px;
+}
+
+@media (max-width: 640px) {
+  .domain-info-notice {
+    padding: 20px 18px;
+    margin-top: 14px;
+  }
+  .notice-title {
+    font-size: 16.5px;
+  }
+  .notice-body {
+    font-size: 13px;
+  }
+}
+
+
 /* Domain CTA Banner Box */
 .domain-cta-banner {
   background: #ffffff;

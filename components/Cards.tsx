@@ -101,12 +101,12 @@ export function JournalEntry({
 
 const AI_DOMAIN = (
   <>
-    AI is changing every industry, but every AI system starts with the same foundation: the right data.
+    High-performing AI models depend entirely on the quality and integrity of their training data.
     <br />
     <br />
-    We work with AI companies across industries to build the data infrastructure behind their intelligence. From
-    sourcing and structuring data to creating high-quality, purpose-built datasets, we help turn real-world
-    information into data that AI can learn from.
+    We partner with engineering and research teams to build dependable data foundations: from multi-channel field
+    sourcing and custom schema structuring to continuous verification. We turn complex physical-world signals into
+    benchmark-grade datasets that teams can reliably build upon.
   </>
 );
 

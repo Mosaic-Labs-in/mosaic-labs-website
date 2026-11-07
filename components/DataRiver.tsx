@@ -190,7 +190,7 @@ export function DataRiver() {
       ctx.font = '500 9px "Inter", sans-serif';
       ctx.fillStyle = INK;
       ctx.fillText(
-        compact ? "PROCESSING & ANNOTATION" : "PROCESSING & ANNOTATION // AI-READY QUALITY",
+        compact ? "PROCESSING & ANNOTATION" : "PROCESSING & ANNOTATION · QUALITY VERIFIED",
         mx,
         top + mh + 16,
       );
@@ -328,7 +328,7 @@ export function DataRiver() {
       <div className="data-river-header">
         <div className="river-live-tag">
           <span className="pulse-dot"></span>
-          <span>END-TO-END PIPELINE // SOURCING → VALIDATION → AI-READY DELIVERY</span>
+          <span>END-TO-END PIPELINE · SOURCING → VALIDATION → AI-READY DELIVERY</span>
         </div>
 
         <div className="river-legend">

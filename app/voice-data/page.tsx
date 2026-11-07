@@ -6,7 +6,7 @@ import { VoiceHeroCanvas } from "@/components/MiniCanvases";
 export const metadata: Metadata = {
   title: "Voice Data Collection for AI: Hindi, English and Gujarati | Mosaic Labs",
   description:
-    "Speech datasets across Hindi, Indian English, and Gujarati—capturing regional accents, dialects, everyday conversations, and natural code-switching for speech AI.",
+    "Speech datasets across Hindi, Indian English, and Gujarati, capturing regional accents, dialects, everyday conversations, and natural code-switching for speech AI.",
 };
 
 export default function VoiceDataPage() {
@@ -25,7 +25,7 @@ export default function VoiceDataPage() {
           </div>
 
           <div className="section-eyebrow" data-reveal>
-            Enterprise Domain 01 // Speech Datasets
+            Enterprise Domain 01 · Speech Datasets
           </div>
           <h1
             className="section-title"
@@ -41,7 +41,7 @@ export default function VoiceDataPage() {
           >
             Building reliable speech technology requires speech data that reflects real-world communication across
             regional accents, dialects, and everyday conversational styles. Mosaic Labs sources, prepares, and
-            structures high-quality voice datasets across Hindi, Indian English, and Gujarati—including regional
+            structures high-quality voice datasets across Hindi, Indian English, and Gujarati, including regional
             dialects and spontaneous code-switching.
           </p>
 
@@ -89,18 +89,18 @@ export default function VoiceDataPage() {
 
           <div className="domain-tri-grid" style={{ marginTop: 0, gap: 18 }} data-reveal>
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">01 / DIALECTS</div>
+              <div className="domain-step-num">01 · DIALECTS</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Authentic Dialect Coverage
               </h3>
               <p className="domain-card-body" style={{ fontSize: 13.5, lineHeight: 1.55 }}>
-                Capturing regional linguistic variations—such as Kathiyawadi and Northern Gujarati—through reviewed
+                Capturing regional linguistic variations, such as Kathiyawadi and Northern Gujarati, through reviewed
                 speaker backgrounds rather than inferring dialect from geography alone.
               </p>
             </div>
 
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">02 / CODE-SWITCHING</div>
+              <div className="domain-step-num">02 · CODE-SWITCHING</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Natural Language Mixing
               </h3>
@@ -111,7 +111,7 @@ export default function VoiceDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">03 / GOVERNANCE</div>
+              <div className="domain-step-num">03 · GOVERNANCE</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Consent &amp; Data Governance
               </h3>
@@ -142,7 +142,7 @@ export default function VoiceDataPage() {
           {/* 3 primary language cards */}
           <div className="domain-tri-grid" style={{ marginTop: 0, gap: 18 }} data-reveal>
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">01 / HINDI</div>
+              <div className="domain-step-num">01 · HINDI</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 10 }}>
                 Hindi Speech Datasets
               </h3>
@@ -156,7 +156,7 @@ export default function VoiceDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">02 / ENGLISH</div>
+              <div className="domain-step-num">02 · ENGLISH</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 10 }}>
                 Indian English Speech
               </h3>
@@ -170,7 +170,7 @@ export default function VoiceDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">03 / GUJARATI</div>
+              <div className="domain-step-num">03 · GUJARATI</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 10 }}>
                 Gujarati &amp; Dialects
               </h3>
@@ -181,6 +181,21 @@ export default function VoiceDataPage() {
                 <li className="panel-spec-item">Gujarati-English and Gujarati-Hindi code-switching</li>
                 <li className="panel-spec-item">Paired with verified text transcriptions</li>
               </ul>
+            </div>
+          </div>
+
+          {/* Additional languages notice */}
+          <div className="domain-info-notice" data-reveal>
+            <div className="notice-inner">
+              <div className="notice-header">
+                <span className="notice-dot"></span>
+                <span className="notice-eyebrow">Language Coverage</span>
+              </div>
+              <h4 className="notice-title">More Languages, More Possibilities</h4>
+              <p className="notice-body">
+                Beyond the languages listed above, our AI can also process and understand additional languages. Language
+                support continues to evolve, helping us serve diverse speakers and multilingual conversations.
+              </p>
             </div>
           </div>
 
@@ -292,7 +307,7 @@ export default function VoiceDataPage() {
             data-reveal
           >
             <div className="section-eyebrow" style={{ color: "var(--burgundy)", marginBottom: 0 }}>
-              Mosaic Labs // Voice &amp; Speech Data
+              Mosaic Labs · Voice &amp; Speech Data
             </div>
             <p style={{ fontSize: 14.5, color: "var(--ink-secondary)", maxWidth: 680, marginBottom: 4 }}>
               To discuss custom speech dataset collection, dialect coverage, or language data specifications, contact

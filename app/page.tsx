@@ -145,7 +145,7 @@ export default function HomePage() {
         <div className="container">
           <div data-reveal>
             <div className="section-eyebrow">Enterprise Domains</div>
-            <h2 className="section-title">Physical domains we empower.</h2>
+            <h2 className="section-title">Physical domains we support.</h2>
             <p className="section-subtitle">
               Physical industries require specialized capture, expert annotation, and continuous ground-truth. We turn
               complex physical environments into structured datasets and applied models.
@@ -182,8 +182,8 @@ export default function HomePage() {
               ]}
               explore
             >
-              High-throughput processing labor and defect quality control for road surface scans, bridge and dam drone
-              imagery, and highway dashcam feeds mapped against Indian Roads Congress (IRC) standards.
+              Annotation and defect quality control for road surface scans, bridge and dam drone imagery, and highway
+              dashcam feeds mapped against Indian Roads Congress (IRC) standards.
             </WorldCard>
 
             <WorldCard
@@ -232,9 +232,9 @@ export default function HomePage() {
                 <div className="pillar-label">OUR MISSION</div>
                 <h3 className="pillar-statement">Bridge the physical-to-digital intelligence gap.</h3>
                 <p className="pillar-body">
-                  Artificial intelligence is transforming every industry, but models are starved of high-quality,
-                  ground-truth physical data. We acquire, clean, structure, and verify the physical datasets that power
-                  the next generation of autonomy and enterprise intelligence.
+                  Artificial intelligence requires high-quality, ground-truth physical data to operate reliably in real
+                  environments. We acquire, clean, structure, and verify the physical datasets that power modern
+                  autonomy and enterprise systems.
                 </p>
               </div>
 

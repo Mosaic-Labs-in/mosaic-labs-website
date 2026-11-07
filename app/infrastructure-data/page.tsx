@@ -25,7 +25,7 @@ export default function InfrastructureDataPage() {
           </div>
 
           <div className="section-eyebrow" data-reveal>
-            Enterprise Domain 02 // Infrastructure
+            Enterprise Domain 02 · Infrastructure
           </div>
           <h1
             className="section-title"
@@ -89,7 +89,7 @@ export default function InfrastructureDataPage() {
 
           <div className="domain-tri-grid" style={{ marginTop: 0, gap: 18 }} data-reveal>
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">01 / VOLUME</div>
+              <div className="domain-step-num">01 · VOLUME</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Repeating Survey Volumes
               </h3>
@@ -100,7 +100,7 @@ export default function InfrastructureDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">02 / TAXONOMY</div>
+              <div className="domain-step-num">02 · TAXONOMY</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Defect Standardization
               </h3>
@@ -111,7 +111,7 @@ export default function InfrastructureDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "24px 20px" }}>
-              <div className="domain-step-num">03 / QUALITY</div>
+              <div className="domain-step-num">03 · QUALITY</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Verification &amp; QA
               </h3>
@@ -141,7 +141,7 @@ export default function InfrastructureDataPage() {
 
           <div className="domain-quad-grid" style={{ marginTop: 0, gap: 18 }} data-reveal>
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">01 / DATA INTAKE</div>
+              <div className="domain-step-num">01 · DATA INTAKE</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Inspection Imagery
               </h3>
@@ -152,18 +152,18 @@ export default function InfrastructureDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">02 / ANNOTATION</div>
+              <div className="domain-step-num">02 · ANNOTATION</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Defect Labeling
               </h3>
               <p className="domain-card-body" style={{ fontSize: 13, lineHeight: 1.55 }}>
-                Systematic marking and classification of defects—including cracks, potholes, ravelling, spalling, and
-                corrosion—graded by type and severity against standard defect lists.
+                Systematic marking and classification of defects, including cracks, potholes, ravelling, spalling, and
+                corrosion, graded by type and severity against standard defect lists.
               </p>
             </div>
 
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">03 / VERIFICATION</div>
+              <div className="domain-step-num">03 · VERIFICATION</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Quality Control
               </h3>
@@ -174,7 +174,7 @@ export default function InfrastructureDataPage() {
             </div>
 
             <div className="domain-card-spec" style={{ padding: "22px 20px" }}>
-              <div className="domain-step-num">04 / OUTPUT</div>
+              <div className="domain-step-num">04 · OUTPUT</div>
               <h3 className="domain-card-title" style={{ fontSize: 16, marginBottom: 8 }}>
                 Structured Datasets
               </h3>
@@ -273,7 +273,7 @@ export default function InfrastructureDataPage() {
             data-reveal
           >
             <div className="section-eyebrow" style={{ color: "var(--burgundy)", marginBottom: 0 }}>
-              Mosaic Labs // Infrastructure Inspection Data
+              Mosaic Labs · Infrastructure Inspection Data
             </div>
             <p style={{ fontSize: 14.5, color: "var(--ink-secondary)", maxWidth: 680, marginBottom: 4 }}>
               To discuss infrastructure inspection data processing, defect taxonomies, or custom delivery requirements,

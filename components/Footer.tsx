@@ -65,7 +65,7 @@ export function Footer() {
 
         <div className="footer-bottom">
           <div>© 2026 MOSAIC LABS INC. ALL RIGHTS RESERVED.</div>
-          <div>DATA AS A SERVICE // PRIVACY BY DESIGN // DPDP ALIGNED</div>
+          <div>DATA AS A SERVICE · PRIVACY BY DESIGN · DPDP ALIGNED</div>
         </div>
       </div>
     </footer>
